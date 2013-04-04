@@ -1,0 +1,19 @@
+/*!
+ * content.css
+ * in "Keyboard Shortcuts for Google Translate" (Google Chrome Extension)
+ * https://github.com/yamayamayamaji/Keyboard-Shortcuts-for-Google-Translate
+ * Copyright 2013, Ryosuke Yamaji
+ *
+ * License: MIT
+ */
+.goog-inline-block.goog-toolbar-button-inner-box::after {
+	color: #aaa;
+	content: "(" counter(shortcuts) ")";
+	counter-increment: shortcuts;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+body {
+	counter-reset: shortcuts;
+}
