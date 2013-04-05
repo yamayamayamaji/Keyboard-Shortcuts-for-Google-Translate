@@ -1,14 +1,15 @@
-Keyboard-Shortcuts-for-Google-Translate
+Keyboard Shortcuts for Google Translate
 =======================================
 
-### Keyboard Shortcuts for Google Translate  
+### [Keyboard Shortcuts for Google Translate](http://goo.gl/FBkb9)  
+([Install from Chrome Web Store](http://goo.gl/FBkb9))  
   
   
 this is a chrome extension that allows to use keyboard shortcuts for Google Translate.
 
 alt + [1-7] keys are binded each indexed buttons.
 
-![GoogleTranslate ScreenShot](/ss-readme1.png)
+![GoogleTranslate ScreenShot](https://raw.github.com/yamayamayamaji/Keyboard-Shortcuts-for-Google-Translate/master/ss-readme1.png)
 
 #####[Win]  
 * button1 -> alt + 1  
@@ -27,3 +28,4 @@ alt + [1-7] keys are binded each indexed buttons.
 * button5 -> option + 5  
 * button6 -> option + 6  
 * button7 -> option + 7  
+
