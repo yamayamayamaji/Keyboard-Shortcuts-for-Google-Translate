@@ -9,7 +9,7 @@
 "use strict";
 
 /**
- * chrome extension content script manager
+ * chrome [ext]ension [c]ontent [s]cript manager
  * @type {Object}
  */
 var extCS = {
@@ -26,10 +26,14 @@ var extCS = {
 		this.setupMouseEventEmulator();
 		this.listenKeyEvent();
 
-		//insert stylesheet
-		$('<link rel="stylesheet" type="text/css">')
-			.attr('href', chrome.extension.getURL('content.css'))
-			.insertAfter('link:last');
+		//add stylesheet
+		var link = document.createElement('link'),
+			lastLink = document.querySelectorAll('link:last-of-type')[0];
+
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = chrome.extension.getURL('content.css');
+		lastLink.parentNode.insertBefore(link, lastLink.nextSibling);
 	},
 
 	/**
@@ -48,16 +52,16 @@ var extCS = {
 	 * set listeners for shortcut key event
 	 */
 	listenKeyEvent: function(){
-		var btns = document.querySelectorAll('.goog-inline-block.goog-toolbar-button-inner-box'),
+		var btns = document.querySelectorAll('#gt-swap, .goog-inline-block.goog-toolbar-button-inner-box'),
 			r = new RegExp();
-		r.compile('^[1-' + btns.length + ']$');
+		r.compile('^[0-' + btns.length + ']$');
 
 		document.onkeydown = function(evt){
 			var idx = String.fromCharCode(evt.keyCode);
-			//continue [alt] + [1-(button length)] is pressed
+			//continue only if [alt] + [0 to (button length)] is pressed
 			if ( !idx.match(r) || !evt.altKey ) { return; }
 
-			var btn = btns[idx - 1];
+			var btn = btns[idx];
 			if (btn) { this.emulateClick(btn); }
 		}.bind(this);
 	},
