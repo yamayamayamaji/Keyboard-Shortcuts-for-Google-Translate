@@ -6,6 +6,18 @@
  *
  * License: MIT
  */
+#gt-swap::after {
+	color: #aaa;
+	content: "(" counter(shortcuts) ")";
+	counter-increment: shortcuts;
+	display: block;
+	font-weight: normal;
+	position: relative;
+	text-align: center;
+	text-decoration: underline;
+	top: -12px;
+}
+
 .goog-inline-block.goog-toolbar-button-inner-box::after {
 	color: #aaa;
 	content: "(" counter(shortcuts) ")";
@@ -15,5 +27,5 @@
 }
 
 body {
-	counter-reset: shortcuts;
+	counter-reset: shortcuts -1;
 }
