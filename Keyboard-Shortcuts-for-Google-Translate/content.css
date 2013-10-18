@@ -8,8 +8,7 @@
  */
 #gt-swap::after {
 	color: #aaa;
-	content: "(" counter(shortcuts) ")";
-	counter-increment: shortcuts;
+	content: "(0)";
 	display: block;
 	font-weight: normal;
 	position: relative;
@@ -18,14 +17,14 @@
 	top: -12px;
 }
 
-.goog-inline-block.goog-toolbar-button-inner-box::after {
+#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap)::after {
 	color: #aaa;
-	content: "(" counter(shortcuts) ")";
-	counter-increment: shortcuts;
+	content: "(" counter(langs) ")";
+	counter-increment: langs;
 	font-weight: normal;
 	text-decoration: underline;
 }
 
 body {
-	counter-reset: shortcuts -1;
+	counter-reset: langs;
 }

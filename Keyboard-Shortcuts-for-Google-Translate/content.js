@@ -52,7 +52,10 @@ var extCS = {
 	 * set listeners for shortcut key event
 	 */
 	listenKeyEvent: function(){
-		var btns = document.querySelectorAll('#gt-swap, .goog-inline-block.goog-toolbar-button-inner-box'),
+		var slice = Array.prototype.slice,
+			swapBtn = document.querySelectorAll('#gt-swap'),
+			langBtns = document.querySelectorAll('#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap)'),
+			btns = slice.call(swapBtn).concat(slice.call(langBtns)),
 			r = new RegExp();
 		r.compile('^[0-' + btns.length + ']$');
 
