@@ -1,7 +1,8 @@
 {
   "name": "Keyboard Shortcuts for Google Translate",
+  "short_name": "KS4GT",
 
-  "version": "1.1.1.0",
+  "version": "1.1.2.0",
 
   "description": "You can set keyboard shortcuts in Google Translate page.",
 
@@ -17,7 +18,8 @@
 
   "content_scripts": [ {
     "all_frames": true,
-    "matches": ["*://translate.google.com/*"],
+    "matches": ["*://*/*"],
+    "include_globs": ["*://translate.google.*/*"],
     "js": ["content.js"]
   } ],
 
@@ -37,7 +39,6 @@
   },
 
   "permissions": [
-    "*://translate.google.com/*",
     "tabs"
   ],
 
