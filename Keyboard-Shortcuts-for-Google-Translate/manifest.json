@@ -39,6 +39,7 @@
   },
 
   "permissions": [
+    "*://translate.google.com/*",
     "tabs"
   ],
 
