@@ -1,30 +1,81 @@
 /*!
- * content.css
+ * content.scss
  * in "Keyboard Shortcuts for Google Translate" (Google Chrome Extension)
  * https://github.com/yamayamayamaji/Keyboard-Shortcuts-for-Google-Translate
  * Copyright 2013, Ryosuke Yamaji
  *
  * License: MIT
  */
+/* line 30, ../sass/content.scss */
 #gt-swap::after {
-	color: #aaa;
-	content: "(0)";
-	display: block;
-	font-weight: normal;
-	position: relative;
-	text-align: center;
-	text-decoration: underline;
-	top: -12px;
-}
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  display: block;
+  font-size: smaller;
+  text-align: center;
+  top: -12px;
+  content: "(0)"; }
 
+/* line 35, ../sass/content.scss */
 #gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap)::after {
-	color: #aaa;
-	content: "(" counter(langs) ")";
-	counter-increment: langs;
-	font-weight: normal;
-	text-decoration: underline;
-}
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  content: "(" counter(langs) ")";
+  counter-increment: langs; }
 
+/* line 41, ../sass/content.scss */
 body {
-	counter-reset: langs;
-}
+  counter-reset: langs; }
+
+/* line 45, ../sass/content.scss */
+#gt-clear::after {
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  display: block;
+  font-size: smaller;
+  text-align: center;
+  top: -12px;
+  content: "(d)";
+  top: -15px; }
+
+/* line 50, ../sass/content.scss */
+#gt-res-listen::after {
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  display: block;
+  font-size: smaller;
+  text-align: center;
+  top: -12px;
+  content: "(l)"; }
+
+/* line 54, ../sass/content.scss */
+#gt-src-listen::after {
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  display: block;
+  font-size: smaller;
+  text-align: center;
+  top: -12px;
+  content: "(L)"; }
+
+/* line 58, ../sass/content.scss */
+#gt-res-select::after {
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  display: block;
+  font-size: smaller;
+  text-align: center;
+  top: -12px;
+  content: "(a)"; }

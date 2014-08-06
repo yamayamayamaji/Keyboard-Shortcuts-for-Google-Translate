@@ -1,0 +1,62 @@
+/*!
+ * content.scss
+ * in "Keyboard Shortcuts for Google Translate" (Google Chrome Extension)
+ * https://github.com/yamayamayamaji/Keyboard-Shortcuts-for-Google-Translate
+ * Copyright 2013, Ryosuke Yamaji
+ *
+ * License: MIT
+ */
+@charset "utf-8";
+
+//mixins
+@mixin key-nav {
+    color: #aaa;
+    font-weight: normal;
+    position: relative;
+    text-decoration: underline;
+}
+@mixin key-nav-h {
+    @include key-nav;
+}
+@mixin key-nav-v {
+    @include key-nav;
+    display: block;
+    font-size: smaller;
+    text-align: center;
+    top: -12px;
+}
+
+
+#gt-swap::after {
+    @include key-nav-v;
+    content: "(0)";
+}
+
+#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap)::after {
+    @include key-nav-h;
+    content: "(" counter(langs) ")";
+    counter-increment: langs;
+}
+
+body {
+    counter-reset: langs;
+}
+
+#gt-clear::after {
+    @include key-nav-v;
+    content: "(d)";
+    top: -15px;
+}
+#gt-res-listen::after {
+    @include key-nav-v;
+    content: "(l)";
+}
+#gt-src-listen::after {
+    @include key-nav-v;
+    content: "(L)";
+}
+#gt-res-select::after {
+    @include key-nav-v;
+    content: "(a)";
+}
+

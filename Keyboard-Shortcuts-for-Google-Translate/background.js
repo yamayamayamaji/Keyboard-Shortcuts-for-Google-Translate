@@ -8,11 +8,11 @@
  */
 
 extBG = _.extend(new Extension({
-	/**
-	 * initialize extension background script
-	 */
-	init: function(){
-	}
+    /**
+     * initialize extension background script
+     */
+    init: function(){
+    }
 }));
 
 extBG.init();
