@@ -1,3 +1,4 @@
 *.pem
 ChromeWebStore/
 trash/
+sass/.sass-cache/

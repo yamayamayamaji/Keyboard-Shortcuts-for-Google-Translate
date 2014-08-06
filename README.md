@@ -10,7 +10,7 @@ this is a chrome extension that allows to use keyboard shortcuts for Google Tran
 alt + [0-7] keys are binded each indexed buttons.
 
 ![GoogleTranslate ScreenShot](https://raw.github.com/yamayamayamaji/Keyboard-Shortcuts-for-Google-Translate/master/ss-readme1.png)
-
+  
 #####[Win]  
 * button0 -> Alt + 0  
 * button1 -> Alt + 1  
@@ -20,6 +20,10 @@ alt + [0-7] keys are binded each indexed buttons.
 * button5 -> Alt + 5  
 * button6 -> Alt + 6  
 * button7 -> Alt + 7  
+* source delete -> Alt + D  
+* result select all -> Alt + A  
+* result listen -> Alt + L  
+* source listen -> Alt + Shift + L  
   
 #####[Mac]  
 * button0 -> Option + 0  
@@ -30,4 +34,8 @@ alt + [0-7] keys are binded each indexed buttons.
 * button5 -> Option + 5  
 * button6 -> Option + 6  
 * button7 -> Option + 7  
+* source delete -> Option + D  
+* result select all -> Option + A  
+* result listen -> Option + L  
+* source listen -> Option + Shift + L  
 
