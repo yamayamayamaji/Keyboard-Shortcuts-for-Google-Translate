@@ -91,6 +91,7 @@ var extCS = {
             if (t) {
                 this.emulateClick(t);
             }
+            evt.preventDefault();
         }.bind(this);
     },
 
