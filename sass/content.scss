@@ -45,7 +45,7 @@ body {
 #gt-clear::after {
     @include key-nav-v;
     content: "(d)";
-    top: -15px;
+    top: -7px;
 }
 #gt-res-listen::after {
     @include key-nav-v;
