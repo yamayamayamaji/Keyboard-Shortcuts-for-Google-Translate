@@ -24,6 +24,7 @@ alt + [0-7] keys are binded each indexed buttons.
 * result select all -> Alt + A  
 * result listen -> Alt + L  
 * source listen -> Alt + Shift + L  
+* save to phrasebook -> Alt + P  
   
 #####[Mac]  
 * button0 -> Option + 0  
@@ -38,4 +39,5 @@ alt + [0-7] keys are binded each indexed buttons.
 * result select all -> Option + A  
 * result listen -> Option + L  
 * source listen -> Option + Shift + L  
+* save to phrasebook -> Option + P  
 
