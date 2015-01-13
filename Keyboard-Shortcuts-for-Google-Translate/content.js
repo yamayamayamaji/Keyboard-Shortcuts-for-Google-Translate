@@ -59,9 +59,10 @@ var extCS = {
 
         //[alt] + key
         var altTarget = {
+            A: document.getElementById('gt-res-select'),
             D: document.getElementById('gt-clear'),
             L: document.getElementById('gt-res-listen'),
-            A: document.getElementById('gt-res-select')
+            P: document.querySelectorAll('#gt-pb-star .goog-toolbar-button')[0]
         };
         topButtons.forEach(function(k, i) { altTarget[i] = k; });
 

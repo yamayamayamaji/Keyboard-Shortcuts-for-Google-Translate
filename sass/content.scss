@@ -42,6 +42,10 @@ body {
     counter-reset: langs;
 }
 
+#gt-res-select::after {
+    @include key-nav-v;
+    content: "(a)";
+}
 #gt-clear::after {
     @include key-nav-v;
     content: "(d)";
@@ -55,8 +59,8 @@ body {
     @include key-nav-v;
     content: "(L)";
 }
-#gt-res-select::after {
+#gt-pb-star .goog-toolbar-button::after {
     @include key-nav-v;
-    content: "(a)";
+    content: "(p)";
 }
 
