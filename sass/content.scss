@@ -42,22 +42,26 @@ body {
     counter-reset: langs;
 }
 
-#gt-res-select::after {
-    @include key-nav-v;
-    content: "(a)";
-}
 #gt-clear::after {
     @include key-nav-v;
     content: "(d)";
     top: -7px;
 }
-#gt-res-listen::after {
+#gt-speech::after {
     @include key-nav-v;
-    content: "(l)";
+    content: "(m)";
 }
 #gt-src-listen::after {
     @include key-nav-v;
-    content: "(L)";
+    content: "(L or k)";
+}
+#gt-res-select::after {
+    @include key-nav-v;
+    content: "(a)";
+}
+#gt-res-listen::after {
+    @include key-nav-v;
+    content: "(l)";
 }
 #gt-pb-star .goog-toolbar-button::after {
     @include key-nav-v;

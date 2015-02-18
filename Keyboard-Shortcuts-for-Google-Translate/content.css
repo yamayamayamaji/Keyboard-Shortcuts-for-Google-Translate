@@ -32,18 +32,6 @@ body {
   counter-reset: langs; }
 
 /* line 45, ../sass/content.scss */
-#gt-res-select::after {
-  color: #aaa;
-  font-weight: normal;
-  position: relative;
-  text-decoration: underline;
-  display: block;
-  font-size: smaller;
-  text-align: center;
-  top: -12px;
-  content: "(a)"; }
-
-/* line 49, ../sass/content.scss */
 #gt-clear::after {
   color: #aaa;
   font-weight: normal;
@@ -56,7 +44,43 @@ body {
   content: "(d)";
   top: -7px; }
 
+/* line 50, ../sass/content.scss */
+#gt-speech::after {
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  display: block;
+  font-size: smaller;
+  text-align: center;
+  top: -12px;
+  content: "(m)"; }
+
 /* line 54, ../sass/content.scss */
+#gt-src-listen::after {
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  display: block;
+  font-size: smaller;
+  text-align: center;
+  top: -12px;
+  content: "(L or k)"; }
+
+/* line 58, ../sass/content.scss */
+#gt-res-select::after {
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  display: block;
+  font-size: smaller;
+  text-align: center;
+  top: -12px;
+  content: "(a)"; }
+
+/* line 62, ../sass/content.scss */
 #gt-res-listen::after {
   color: #aaa;
   font-weight: normal;
@@ -68,19 +92,7 @@ body {
   top: -12px;
   content: "(l)"; }
 
-/* line 58, ../sass/content.scss */
-#gt-src-listen::after {
-  color: #aaa;
-  font-weight: normal;
-  position: relative;
-  text-decoration: underline;
-  display: block;
-  font-size: smaller;
-  text-align: center;
-  top: -12px;
-  content: "(L)"; }
-
-/* line 62, ../sass/content.scss */
+/* line 66, ../sass/content.scss */
 #gt-pb-star .goog-toolbar-button::after {
   color: #aaa;
   font-weight: normal;

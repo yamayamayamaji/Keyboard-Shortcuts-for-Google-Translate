@@ -21,9 +21,10 @@ alt + [0-7] keys are binded each indexed buttons.
 * button6 -> Alt + 6  
 * button7 -> Alt + 7  
 * source delete -> Alt + D  
+* source microphone -> Alt + M  
+* source listen -> Alt + Shift + L, Alt + K  
 * result select all -> Alt + A  
 * result listen -> Alt + L  
-* source listen -> Alt + Shift + L  
 * save to phrasebook -> Alt + P  
   
 #####[Mac]  
@@ -36,8 +37,9 @@ alt + [0-7] keys are binded each indexed buttons.
 * button6 -> Option + 6  
 * button7 -> Option + 7  
 * source delete -> Option + D  
+* source microphone -> Option + M  
+* source listen -> Option + Shift + L, Option + K  
 * result select all -> Option + A  
 * result listen -> Option + L  
-* source listen -> Option + Shift + L  
 * save to phrasebook -> Option + P  
 
