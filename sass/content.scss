@@ -14,24 +14,24 @@
     font-weight: normal;
     position: relative;
     text-decoration: underline;
-    @content;
     content: attr(data-key-navi);
+    @content;
 }
 
 @mixin key-nav-h() {
     @include key-nav();
 }
-@mixin key-nav-v($top) {
+@mixin key-nav-v($top, $display: block) {
     @include key-nav() {
-        display: block;
+        display: $display;
         text-align: center;
         @content;
     }
     top: $top;
 }
 
-@mixin key-nav-v-char($top: 0) {
-    @include key-nav-v($top) {
+@mixin key-nav-v-char($top: 0, $display: block) {
+    @include key-nav-v($top, $display) {
         font-size: smaller;
     }
 }
@@ -68,8 +68,7 @@
 
 #gt-lang-submit {
     &::after {
-        @include key-nav-v-char(9px);
-        display: none;
+        @include key-nav-v-char(9px, none);
     }
     &:hover::after {
         display: inline-block;
@@ -90,5 +89,16 @@
 #gt-res-roman {
     &::after {
         @include key-nav-v-char(-12px);
+    }
+}
+
+// source wrapper
+#gt-src-wrap::after {
+    @include key-nav-v(auto) {
+        font-size: smaller;
+        right: 3px;
+        bottom: 1px;
+        position: absolute;
+        content: attr(data-key-navi) " to focus";
     }
 }

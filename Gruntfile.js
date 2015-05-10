@@ -40,12 +40,12 @@ module.exports = function(grunt) {
         jsonmin: {
             dev: {
                 files: {
-                    '<%= dir.dev %>/buttons_default.min.json': '<%= dir.dev %>/buttons_default.json'
+                    '<%= dir.dev %>/default_settings.min.json': '<%= dir.dev %>/default_settings.json'
                 }
             },
             dist: {
                 files: {
-                    '<%= dir.dist %>/buttons_default.min.json': '<%= dir.dev %>/buttons_default.json'
+                    '<%= dir.dist %>/default_settings.min.json': '<%= dir.dev %>/default_settings.json'
                 }
             }
         },

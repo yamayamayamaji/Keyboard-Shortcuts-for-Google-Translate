@@ -1,5 +1,5 @@
 /*!
- * buttons_default.json
+ * default_settings.json
  * in "Keyboard Shortcuts for Google Translate" (Google Chrome Extension)
  * https://github.com/yamayamayamaji/Keyboard-Shortcuts-for-Google-Translate
  * Copyright 2013, Ryosuke Yamaji
@@ -214,6 +214,20 @@
     }
   },
 
+  "srcFocus": {
+    "shortcutKey": "f",
+    "group": "source",
+    "alias": "focus to source",
+    "alt": true,
+    "clickTarget": {
+      "selector": "#source"
+    },
+    "captionTarget": {
+      "selector": "#gt-src-wrap"
+    },
+    "cmd": "focus"
+  },
+
   // uncustomizable
   "translate": {
     "shortcutKey": "shift + enter",
@@ -222,6 +236,7 @@
     },
     "captionTarget": {
       "selector": "#gt-lang-submit"
-    }
+    },
+    "cmd": "click"
   }
 }

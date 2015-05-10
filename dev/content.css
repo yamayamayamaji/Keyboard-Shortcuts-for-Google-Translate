@@ -11,9 +11,9 @@
   font-weight: normal;
   position: relative;
   text-decoration: underline;
+  content: attr(data-key-navi);
   display: block;
   text-align: center;
-  content: attr(data-key-navi);
   top: -13px; }
 
 #gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit)::after {
@@ -30,10 +30,10 @@
   font-weight: normal;
   position: relative;
   text-decoration: underline;
+  content: attr(data-key-navi);
   display: block;
   text-align: center;
   left: -7px;
-  content: attr(data-key-navi);
   top: -5px; }
 
 #gt-lang-submit::after {
@@ -41,12 +41,11 @@
   font-weight: normal;
   position: relative;
   text-decoration: underline;
-  display: block;
+  content: attr(data-key-navi);
+  display: none;
   text-align: center;
   font-size: smaller;
-  content: attr(data-key-navi);
-  top: 9px;
-  display: none; }
+  top: 9px; }
 #gt-lang-submit:hover::after {
   display: inline-block; }
 
@@ -55,10 +54,10 @@
   font-weight: normal;
   position: relative;
   text-decoration: underline;
+  content: attr(data-key-navi);
   display: block;
   text-align: center;
   font-size: smaller;
-  content: attr(data-key-navi);
   top: -7px; }
 
 #gt-speech::after,
@@ -73,10 +72,25 @@
   font-weight: normal;
   position: relative;
   text-decoration: underline;
+  content: attr(data-key-navi);
   display: block;
   text-align: center;
   font-size: smaller;
-  content: attr(data-key-navi);
   top: -12px; }
+
+#gt-src-wrap::after {
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  content: attr(data-key-navi);
+  display: block;
+  text-align: center;
+  font-size: smaller;
+  right: 3px;
+  bottom: 1px;
+  position: absolute;
+  content: attr(data-key-navi) " to focus";
+  top: auto; }
 
 /*# sourceMappingURL=content.css.map */

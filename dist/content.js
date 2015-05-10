@@ -22,7 +22,7 @@ var KS4GT_CS = {
     keysRegExp: '',
 
     userSettings: {},
-    targetButtons: {},
+    recievers: {},
 
     /**
      * ready before initialize
@@ -33,15 +33,15 @@ var KS4GT_CS = {
         if (me.isReady) { return; }
 
         chrome.extension.sendMessage({
-                // load buttons settings from json file
-                targetButtons: null,
+                // load default settings from json file
+                defaultSettings: null,
                 // load user settings from extension sync storage
                 userSettings: null,
                 // show pageAction icon
                 showPageAction: null
             },
             function(res) {
-                me.setupTargetButtons(res.targetButtons);
+                me.setupRecievers(res.defaultSettings);
                 me.userSettings = res.userSettings;
 
                 me.isReady = true;
@@ -74,16 +74,17 @@ var KS4GT_CS = {
     },
 
     /**
-     * setup button settings from buttons_default.json
+     * setup recievers object from setting file
+     * @param  {Object} settingsJson JSON of default settings
      */
-    setupTargetButtons: function(buttonJson) {
+    setupRecievers: function(settingsJson) {
         var me = this,
             $ = document.querySelectorAll.bind(document);
 
         // add key:value pair under listed
         //  clickTarget: dom element matches selector and idx in settings
         //  captionTarget: dom element matches selector and idx in settings
-        me.iterateObject(buttonJson, function(name, settings) {
+        me.iterateObject(settingsJson, function(name, settings) {
             var cli = settings.clickTarget,
                 cap = settings.captionTarget;
 
@@ -92,11 +93,11 @@ var KS4GT_CS = {
                 settings.capElm = $(cap.selector)[cap.idx || 0];
             }
 
-            // remove if the button no longer exists
-            if (!settings.elm) { delete buttonJson[name]; }
+            // remove if the target element no longer exists
+            if (!settings.elm) { delete settingsJson[name]; }
         });
 
-        me.targetButtons = buttonJson;
+        me.recievers = settingsJson;
     },
 
     /**
@@ -106,14 +107,14 @@ var KS4GT_CS = {
         var me = this,
             userSettings = me.userSettings;
 
-        // apply user customization to button settings
+        // apply user customization to default settings
         me.iterateObject(userSettings, function(name, setting) {
-            var btn = me.targetButtons[name];
+            var rcv = me.recievers[name];
 
-            // continue the button no longer exists
-            if (!btn) { return; }
+            // skip if the target element no longer exists
+            if (!rcv) { return; }
 
-            Object.assign(btn, {
+            Object.assign(rcv, {
                 shortcutKey: setting.shortcutKey && setting.shortcutKey.toLowerCase(),
                 // alt: setting.alt,
                 shift: setting.shift
@@ -122,23 +123,23 @@ var KS4GT_CS = {
     },
 
     /**
-     * display shortcut key character to each button
+     * display shortcut key character to each target
      */
     setKeyCaption: function() {
         var me = this;
 
-        me.iterateObject(me.targetButtons, function(name, btn) {
-            var key = btn.shortcutKey;
+        me.iterateObject(me.recievers, function(name, rcv) {
+            var key = rcv.shortcutKey;
 
             // continue if shortcut key is not assigned
             if (!key) { return; }
 
-            if (btn.shift === true) {
+            if (rcv.shift === true) {
                 key = key.toUpperCase();
             }
 
             // set data-key-navi attribute
-            (btn.capElm || btn.elm).dataset.keyNavi = '(' + key + ')';
+            (rcv.capElm || rcv.elm).dataset.keyNavi = '(' + key + ')';
         });
     },
 
@@ -169,26 +170,30 @@ var KS4GT_CS = {
     },
 
     /**
-     * initialize {"shortcut key": "button selector"} map
+     * initialize shortcutkey-reciever map
+     * {"shortcut key": {
+     *     elm: "target element",
+     *     cmd: "emulate command"
+     * }}
      */
     initKeyMaps: function() {
         var me = this,
             r = new RegExp(), keys = '', key;
 
-        me.iterateObject(me.targetButtons, function(name, btn) {
-            var key = btn.shortcutKey,
-                elm = btn.elm;
+        me.iterateObject(me.recievers, function(name, rcv) {
+            var key = rcv.shortcutKey,
+                reciever = { elm: rcv.elm, cmd: rcv.cmd };
 
             if (!key) { return; }
 
             // [alt] + [shift] + key
-            if (btn.shift === true) {
-                me.altShiftTarget[key] = elm;
+            if (rcv.shift === true) {
+                me.altShiftTarget[key] = reciever;
                 return;
             }
             // [alt] + key
-            if (btn.alt === true) {
-                me.altTarget[key] = elm;
+            if (rcv.alt === true) {
+                me.altTarget[key] = reciever;
             }
         });
 
@@ -204,59 +209,70 @@ var KS4GT_CS = {
      */
     listenKeyEvent: function() {
         var me = this,
-            translateBtn = me.targetButtons.translate.elm;
+            translateRcv = me.recievers.translate;
 
         document.onkeydown = function(evt) {
-            var btn;
+            var rcv, t;
 
             // shift + enter => translate button
             if (evt.shiftKey && evt.keyCode == 13) {
                 window.setTimeout(function() {
-                    translateBtn.focus();
+                    translateRcv.elm.focus();
                 }, 0);
-                translateBtn.click();
-                evt.preventDefault();
-                return;
+                rcv = { elm: translateRcv.elm, cmd: translateRcv.cmd };
+            } else {
+                rcv = me.getAssignedReciever(evt);
             }
 
-            btn = me.getAssignedButton(evt);
-
-            if (btn) {
-                me.emulateClick(btn);
+            if (rcv) {
+                me.emulate(rcv.cmd, rcv.elm);
                 evt.preventDefault();
             }
         };
     },
 
     /**
-     * return target button assigned the event
+     * return target reciever info (element, command) assigned the event
      * @param  {Event}  evt  triggered event
-     * @return {Object} button (return undefined if not assigned any)
+     * @return {Object} reciver info (return undefined if not assigned any)
      */
-    getAssignedButton: function(evt) {
+    getAssignedReciever: function(evt) {
         var me = this,
             key = String.fromCharCode(evt.keyCode).toLowerCase(),
-            btn;
+            reciever;
 
         // continue only if [alt] + (registered key) is pressed
         if (!key.match(me.keysRegExp) || !evt.altKey) { return; }
 
         if (evt.shiftKey) {
-            btn = me.altShiftTarget[key];
+            reciever = me.altShiftTarget[key];
         }
 
-        if (!btn) {
-            btn = me.altTarget[key];
+        if (!reciever) {
+            reciever = me.altTarget[key];
         }
 
-        return btn;
+        return reciever;
     },
 
     /**
-     * emulate click event
+     * emulate specified event
+     * @param  {Srting} cmd name of emulate event
      * @param  {Object} elm HTML Element
      */
-    emulateClick: function(elm) {
+    emulate: function(cmd, elm) {
+        if (elm) {
+            var me = this,
+                cmd = cmd || 'mouseDownUp' ;
+            me['emulate' + me.camelize(cmd)](elm);
+        }
+    },
+
+    /**
+     * emulate mousedown and mouseup (simmulate click) event
+     * @param  {Object} elm HTML Element
+     */
+    emulateMouseDownUp: function(elm) {
         if (elm) {
             var de = elm.dispatchEvent.bind(elm),
                 me = this.mouseEvent;
@@ -264,6 +280,26 @@ var KS4GT_CS = {
             de(me['mousedown']);
             de(me['mouseup']);
             de(me['mouseout']);
+        }
+    },
+
+    /**
+     * emulate click
+     * @param  {Object} elm HTML Element
+     */
+    emulateClick: function(elm) {
+        if (elm) {
+            elm.click();
+        }
+    },
+
+    /**
+     * emulate focus
+     * @param  {Object} elm HTML Element
+     */
+    emulateFocus: function(elm) {
+        if (elm) {
+            elm.focus();
         }
     },
 
@@ -280,6 +316,12 @@ var KS4GT_CS = {
                 }
             }
         }
+    },
+
+    camelize: function(str) {
+        return str.replace(/(?:^|[-_])(\w)/g, function(_, c) {
+          return c ? c.toUpperCase() : '';
+        });
     }
 };
 

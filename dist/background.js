@@ -28,8 +28,8 @@ KS4GT_BP = {
         userSettings: function(opt) {
             return this.getUserSettings(opt && opt.search);
         },
-        targetButtons: function(opt) {
-            return this.getTargetButtons();
+        defaultSettings: function(opt) {
+            return this.getDefaultSettings();
         },
         platformInfo: function(opt) {
             return this.getPlatformInfo();
@@ -135,13 +135,13 @@ KS4GT_BP = {
     },
 
     /**
-     * load JSON file of default settings of target buttons
-     * @return {Promise/JSON(when promise resolved)} JSON of button settings
+     * load JSON file of default settings
+     * @return {Promise/JSON(when promise resolved)} JSON of default settings
      */
-    getTargetButtons: function() {
+    getDefaultSettings: function() {
 
         return new Promise(function(resolve, reject) {
-            qwest.get(chrome.extension.getURL('buttons_default.min.json'))
+            qwest.get(chrome.extension.getURL('default_settings.min.json'))
             .then(function(xhr, res) {
                 try{
                     resolve(JSON.parse(res));

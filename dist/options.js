@@ -32,7 +32,7 @@ var KS4GT_OP_view = {
     SAVE_BTN_ID:       'save-btn',
     RESET_BTN_ID:      'reset-btn',
     ROW_CLS:           'row',
-    BTN_ID_NAME:       'name',
+    RCV_ID_NAME:       'name',
     SHORTCUT_KEY_NAME: 'shortcut-key',
     SHIFT_NAME:        'with-shift',
 
@@ -120,17 +120,17 @@ var KS4GT_OP_view = {
 
     /**
      * returns an HTML fragment of this template with the specified values applied
-     * @param  {String} name     name of button
-     * @param  {Object} settings template values of button setting
+     * @param  {String} name     name(as index) of reciever
+     * @param  {Object} settings template values of reciever setting
      * @return {String}          HTML fragment
      */
     settingsTmpl: function(name, settings) {
         var me = this,
             h =
 `<h2 class="${me.ROW_CLS} row-wrap">
-  <div class="btn-name-wrap">
+  <div class="rcv-name-wrap">
     ${settings.alias || name}
-    <input type="hidden" name="${me.BTN_ID_NAME}" value="${name}">
+    <input type="hidden" name="${me.RCV_ID_NAME}" value="${name}">
   </div>
   <div class="key-inputer-wrap">
     ${me.PIVOT_KEY} + 
@@ -184,8 +184,8 @@ var KS4GT_OP_view = {
         return $$('[name=' + this.SHORTCUT_KEY_NAME + ']');
     },
 
-    getBtnIdElm: function(row) {
-        return this.getRowItem(this.BTN_ID_NAME, row);
+    getRcvIdElm: function(row) {
+        return this.getRowItem(this.RCV_ID_NAME, row);
     },
 
     getShorcutKeyElm: function(row) {
@@ -196,8 +196,8 @@ var KS4GT_OP_view = {
         return this.getRowItem(this.SHIFT_NAME, row);
     },
 
-    getBtnId: function(row) {
-        return this.getBtnIdElm(row).value;
+    getRcvId: function(row) {
+        return this.getRcvIdElm(row).value;
     },
 
     getShorcutKey: function(row) {
@@ -217,7 +217,7 @@ var KS4GT_OP_view = {
 var KS4GT_OP = {
     acceptableKeyRegExp: /^[0-9a-z]?$/,
     userSettings: {},
-    targetButtons: {},
+    recievers: {},
 
     view: KS4GT_OP_view,
 
@@ -230,15 +230,15 @@ var KS4GT_OP = {
         if (me.isReady) { return; }
 
         chrome.extension.sendMessage({
-                // load buttons settings from json file
-                targetButtons: null,
+                // load default settings from json file
+                defaultSettings: null,
                 // load user settings from extension sync storage
                 userSettings: null,
                 // get runtime platform infomation
                 platformInfo: null,
             },
             function(res) {
-                me.targetButtons = res.targetButtons || {};
+                me.recievers = res.defaultSettings || {};
                 me.userSettings = res.userSettings || {};
                 me.platformInfo = res.platformInfo || {};
 
@@ -266,7 +266,7 @@ var KS4GT_OP = {
 
         // initialize view
         me.view.init({
-            defaultSettings: me.targetButtons,
+            defaultSettings: me.recievers,
             customSettings:  me.userSettings,
             pivotKey:        pivotKey
         });
@@ -300,7 +300,7 @@ var KS4GT_OP = {
 
         // read user input values
         iterateObject(me.view.getAllRowElements(), function(idx, row) {
-            var name = me.view.getBtnId(row),
+            var name = me.view.getRcvId(row),
                 sk = me.view.getShorcutKey(row),
                 settings;
 

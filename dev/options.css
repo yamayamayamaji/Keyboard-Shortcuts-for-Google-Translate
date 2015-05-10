@@ -55,7 +55,7 @@ body {
   .row-wrap:nth-of-type(even) {
     background-color: #f6f6f6; }
 
-.btn-name-wrap {
+.rcv-name-wrap {
   display: inline-block;
   vertical-align: middle;
   width: 80px;

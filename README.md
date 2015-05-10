@@ -25,34 +25,18 @@ default settings are
 * lang7 -> Alt + 7  
 * lang list(source) -> Alt + 8  
 * lang list(target) -> Alt + 9  
-* source delete -> Alt + D  
-* source microphone -> Alt + M  
-* source listen -> Alt + Shift + L  
-* result select all -> Alt + A  
-* result copy -> Alt + C  
-* result listen -> Alt + L  
-* save to phrasebook -> Alt + P  
+* source delete -> Alt + d  
+* source microphone -> Alt + m  
+* source listen -> Alt + Shift + l  
+* result select all -> Alt + a  
+* result copy -> Alt + c  
+* result listen -> Alt + l  
+* save to phrasebook -> Alt + p  
+* focus to source input -> Alt + f  
 * translate -> Shift + Enter  
   
 #####[Mac]  
-* lang swap -> Option + 0  
-* lang1 -> Option + 1  
-* lang2 -> Option + 2  
-* lang3 -> Option + 3  
-* lang4 -> Option + 4  
-* lang5 -> Option + 5  
-* lang6 -> Option + 6  
-* lang7 -> Option + 7  
-* lang list(source) -> Option + 8  
-* lang list(target) -> Option + 9  
-* source delete -> Option + D  
-* source microphone -> Option + M  
-* source listen -> Option + Shift + L  
-* result select all -> Option + A  
-* result copy -> Option + C  
-* result listen -> Option + L  
-* save to phrasebook -> Option + P  
-* translate -> Shift + Enter  
+use [Option] instead of [Alt]
   
 If you want to customize keys, click the options link which is shown on the extensions management page at chrome://extensions
 or right click extension's icon at address bar.  
