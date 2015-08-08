@@ -6,20 +6,23 @@
  *
  * License: MIT
  */
-/* line 30, ../sass/content.scss */
+/* line 50, ../sass/content.scss */
+body {
+  counter-reset: langs; }
+
+/* line 54, ../sass/content.scss */
 #gt-swap::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
   text-decoration: underline;
   display: block;
-  font-size: smaller;
   text-align: center;
-  top: -12px;
-  content: "(0)"; }
+  content: "(0)";
+  top: -13px; }
 
-/* line 35, ../sass/content.scss */
-#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap)::after {
+/* line 58, ../sass/content.scss */
+#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit)::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
@@ -27,79 +30,98 @@
   content: "(" counter(langs) ")";
   counter-increment: langs; }
 
-/* line 41, ../sass/content.scss */
-body {
-  counter-reset: langs; }
+/* line 64, ../sass/content.scss */
+#gt-sl-gms .goog-flat-menu-button-dropdown::after {
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  display: block;
+  text-align: center;
+  left: -7px;
+  content: "(8)";
+  top: -5px; }
 
-/* line 45, ../sass/content.scss */
+/* line 69, ../sass/content.scss */
+#gt-tl-gms .goog-flat-menu-button-dropdown::after {
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  display: block;
+  text-align: center;
+  left: -7px;
+  content: "(9)";
+  top: -5px; }
+
+/* line 74, ../sass/content.scss */
 #gt-clear::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
   text-decoration: underline;
   display: block;
-  font-size: smaller;
   text-align: center;
-  top: -12px;
+  font-size: smaller;
   content: "(d)";
   top: -7px; }
 
-/* line 50, ../sass/content.scss */
+/* line 77, ../sass/content.scss */
 #gt-speech::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
   text-decoration: underline;
   display: block;
-  font-size: smaller;
   text-align: center;
-  top: -12px;
-  content: "(m)"; }
+  font-size: smaller;
+  content: "(m)";
+  top: -12px; }
 
-/* line 54, ../sass/content.scss */
+/* line 80, ../sass/content.scss */
 #gt-src-listen::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
   text-decoration: underline;
   display: block;
-  font-size: smaller;
   text-align: center;
-  top: -12px;
-  content: "(L or k)"; }
+  font-size: smaller;
+  content: "(L or k)";
+  top: -12px; }
 
-/* line 58, ../sass/content.scss */
+/* line 83, ../sass/content.scss */
 #gt-res-select::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
   text-decoration: underline;
   display: block;
-  font-size: smaller;
   text-align: center;
-  top: -12px;
-  content: "(a)"; }
+  font-size: smaller;
+  content: "(a)";
+  top: -12px; }
 
-/* line 62, ../sass/content.scss */
+/* line 86, ../sass/content.scss */
 #gt-res-listen::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
   text-decoration: underline;
   display: block;
-  font-size: smaller;
   text-align: center;
-  top: -12px;
-  content: "(l)"; }
+  font-size: smaller;
+  content: "(l)";
+  top: -12px; }
 
-/* line 66, ../sass/content.scss */
+/* line 89, ../sass/content.scss */
 #gt-pb-star .goog-toolbar-button::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
   text-decoration: underline;
   display: block;
-  font-size: smaller;
   text-align: center;
-  top: -12px;
-  content: "(p)"; }
+  font-size: smaller;
+  content: "(p)";
+  top: -12px; }
