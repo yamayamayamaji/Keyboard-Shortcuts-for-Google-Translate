@@ -76,6 +76,7 @@ var extCS = {
             8: $('gt-sl-gms'),
             9: $('gt-tl-gms'),
             A: $('gt-res-select'),
+            C: $('gt-res-copy'),
             D: $('gt-clear'),
             K: $('gt-src-listen'),
             L: $('gt-res-listen'),

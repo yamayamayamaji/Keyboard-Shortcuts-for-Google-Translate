@@ -83,6 +83,9 @@ body {
 #gt-res-select::after {
     @include key-nav-v-char("(a)");
 }
+#gt-res-copy::after {
+    @include key-nav-v-char("(c)");
+}
 #gt-res-listen::after {
     @include key-nav-v-char("(l)");
 }

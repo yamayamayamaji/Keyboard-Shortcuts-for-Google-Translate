@@ -27,6 +27,7 @@ shift + enter is binded translate button.
 * source microphone -> Alt + M  
 * source listen -> Alt + Shift + L, Alt + K  
 * result select all -> Alt + A  
+* result copy -> Alt + C  
 * result listen -> Alt + L  
 * save to phrasebook -> Alt + P  
 * translate -> Shift + Enter  
@@ -46,6 +47,7 @@ shift + enter is binded translate button.
 * source microphone -> Option + M  
 * source listen -> Option + Shift + L, Option + K  
 * result select all -> Option + A  
+* result copy -> Option + C  
 * result listen -> Option + L  
 * save to phrasebook -> Option + P  
 * translate -> Shift + Enter  
