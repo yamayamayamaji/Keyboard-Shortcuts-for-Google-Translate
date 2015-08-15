@@ -156,7 +156,6 @@ var extCS = {
                 me = this.mouseEvent;
             de(me['mouseover']);
             de(me['mousedown']);
-            de(me['click']);
             de(me['mouseup']);
             de(me['mouseout']);
         }
