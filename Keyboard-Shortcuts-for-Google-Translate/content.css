@@ -103,6 +103,18 @@ body {
   top: -12px; }
 
 /* line 86, ../sass/content.scss */
+#gt-res-copy::after {
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  display: block;
+  text-align: center;
+  font-size: smaller;
+  content: "(c)";
+  top: -12px; }
+
+/* line 89, ../sass/content.scss */
 #gt-res-listen::after {
   color: #aaa;
   font-weight: normal;
@@ -114,7 +126,7 @@ body {
   content: "(l)";
   top: -12px; }
 
-/* line 89, ../sass/content.scss */
+/* line 92, ../sass/content.scss */
 #gt-pb-star .goog-toolbar-button::after {
   color: #aaa;
   font-weight: normal;
