@@ -20,7 +20,7 @@
     "all_frames": true,
     "matches": ["*://*/*"],
     "include_globs": ["*://translate.google.*/*"],
-    "js": ["content.js"]
+    "js": ["lib/Sass.js/sass.sync.js", "content.js"]
   } ],
 
   "content_security_policy": "script-src 'self'; object-src 'none'; img-src 'self'",
@@ -43,6 +43,7 @@
   ],
 
   "web_accessible_resources": [
-    "content.css"
+    "lib/Sass.js/libsass.js.mem",
+    "content.scss"
   ]
 }

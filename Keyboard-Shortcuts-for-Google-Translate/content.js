@@ -9,40 +9,156 @@
 "use strict";
 
 /**
- * chrome [ext]ension [c]ontent [s]cript manager
+ * chrome extension content script manager
  * @type {Object}
  */
-var extCS = {
+var KS4GT = {
+    STORAGE_KEY: 'ks4gt',
+
     noop: function() {},
     mouseEvent: [],
 
     altTarget: {},
     altShiftTarget: {},
     keysRegExp: '',
+    userSettings: {},
+
+    /**
+     * shortcut key target buttons 
+     */
+    targetButtons: (function() {
+        var me = this,
+            $ = document.getElementById.bind(document),
+            $$ = document.querySelectorAll.bind(document),
+            langButtons = $$('#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit)');
+
+        var buttons = {
+            swap:       { shortcutKey: '0', alt: true, elm: $('gt-swap') },
+            lang1:      { shortcutKey: '1', alt: true, elm: langButtons[0] },
+            lang2:      { shortcutKey: '2', alt: true, elm: langButtons[1] },
+            lang3:      { shortcutKey: '3', alt: true, elm: langButtons[2] },
+            lang4:      { shortcutKey: '4', alt: true, elm: langButtons[3] },
+            lang5:      { shortcutKey: '5', alt: true, elm: langButtons[4] },
+            lang6:      { shortcutKey: '6', alt: true, elm: langButtons[5] },
+            lang7:      { shortcutKey: '7', alt: true, elm: langButtons[6] },
+            slGms:      { shortcutKey: '8', alt: true, elm: $('gt-sl-gms') },
+            tlGms:      { shortcutKey: '9', alt: true, elm: $('gt-tl-gms') },
+            clear:      { shortcutKey: 'd', alt: true, elm: $('gt-clear') },
+            speech:     { shortcutKey: 'm', alt: true, elm: $('gt-speech') },
+            srcRoman:   { shortcutKey: '',  alt: true, elm: $('gt-src-roman') },
+            // srcListen:  { shortcutKey: 'k', alt: true, elm: $('gt-src-listen') },
+            srcListen:  { shortcutKey: 'l', alt: true, elm: $('gt-src-listen'), shift: true  },
+            resSelect:  { shortcutKey: 'a', alt: true, elm: $('gt-res-select') },
+            resCopy:    { shortcutKey: 'c', alt: true, elm: $('gt-res-copy') },
+            resRoman:   { shortcutKey: '',  alt: true, elm: $('gt-res-roman') },
+            resListen:  { shortcutKey: 'l', alt: true, elm: $('gt-res-listen') },
+            pbStar:     { shortcutKey: 'p', alt: true, elm: $$('#gt-pb-star .goog-toolbar-button')[0] }
+        };
+
+        return buttons;
+    })(),
 
     /**
      * initialize extension content script
      */
     init: function() {
+        var me = this;
+
         // show pageAction icon
-        chrome.extension.sendMessage({task: 'showPageAction'}, this.noop);
+        chrome.extension.sendMessage(
+            { require: [['storage', 'ks4gt']], task: 'showPageAction' },
+            function(res) {
+console.log(res);
 
-        this.setupMouseEventEmulator();
-        this.initKeyMaps();
-        this.listenKeyEvent();
+            }
+        );
 
-        // add stylesheet
-        var link = document.createElement('link'),
-            lastLink = document.querySelectorAll('link:last-of-type')[0];
+        me.setupMouseEventEmulator();
 
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = chrome.extension.getURL('content.css');
-        lastLink.parentNode.insertBefore(link, lastLink.nextSibling);
+        me.loadUserSetting();
+        me.applyUserSetting();
+
+        me.initKeyMaps();
+        me.listenKeyEvent();
+        me.setKeyCaption();
     },
 
     /**
-     * create mouse event emulators and set to property of extCS
+     * load user custom settings from localStorage
+     */
+    loadUserSetting: function() {
+        var me = this,
+            s = localStorage.getItem(me.STORAGE_KEY);
+
+        if (s) {
+            me.userSettings = JSON.parse(s).userSettings;
+        }
+    },
+
+    /**
+     * apply user custom settings to extension
+     */
+    applyUserSetting: function() {
+        var me = this,
+            userSettings = me.userSettings;
+
+        // apply user customization to button settings
+        me.iterateObject(userSettings, function(name, setting) {
+            me.targetButtons[name].shortcutKey = setting.key.toLowerCase();
+            me.targetButtons[name].alt = setting.alt;
+            me.targetButtons[name].shift = setting.shift;
+        });
+
+    },
+
+    /**
+     * display shortcut key character to each button
+     */
+    setKeyCaption: function() {
+        var me = this,
+            sassStr = '';
+
+        // set sass variables
+        me.iterateObject(me.targetButtons, function(name, btn) {
+            var key = btn.shortcutKey;
+            if (btn.shift === true) { key = key.toUpperCase(); }
+            sassStr += '$keyFor' + me.capitalize(name) + ':"' + key + '";'
+        });
+
+        // load scss file
+        Sass.preloadFiles(chrome.extension.getURL('.'), '', ['content.scss'], function() {
+            // create scss file for sass variables
+            Sass.writeFile('user_setting.scss', sassStr);
+            // compile sass
+            Sass.compile(
+                '@import "user_setting"; @import "content";',
+                function callback(result) {
+                    // add compiled css styles
+                    me.injectStyles(result.text);
+                }
+            );
+        });
+
+    },
+
+    /**
+     * inject styles
+     * @param {String/Array} cssRules 
+     */
+    injectStyles: function(cssRules) {
+        var style = document.createElement('style'),
+            lastStyle = document.querySelectorAll('style:last-of-type')[0];
+
+        if (typeof(cssRules) === 'array') {
+            cssRules = cssRules.join('\n');
+        }
+
+        style.innerHTML = cssRules;
+        lastStyle.parentNode.insertBefore(style, lastStyle.nextSibling);
+    },
+
+    /**
+     * create mouse event emulators and set to property of KS4GT
      */
     setupMouseEventEmulator: function() {
         var events = ['mousedown', 'mouseup', 'mouseout', 'mouseover', 'click'];
@@ -57,43 +173,31 @@ var extCS = {
      * initialize {shortcut key: button selector} map
      */
     initKeyMaps: function() {
-        var $ = document.getElementById.bind(document),
-            $$ = document.querySelectorAll.bind(document),
+        var me = this,
             r = new RegExp(), keys = '', key;
 
-        var langButtons = $$('#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit)');
+        me.iterateObject(me.targetButtons, function(name, btn) {
+            var key = btn.shortcutKey,
+                elm = btn.elm;
 
-        // [alt] + key
-        this.altTarget = {
-            0: $('gt-swap'),
-            1: langButtons[0],
-            2: langButtons[1],
-            3: langButtons[2],
-            4: langButtons[3],
-            5: langButtons[4],
-            6: langButtons[5],
-            7: langButtons[6],
-            8: $('gt-sl-gms'),
-            9: $('gt-tl-gms'),
-            A: $('gt-res-select'),
-            C: $('gt-res-copy'),
-            D: $('gt-clear'),
-            K: $('gt-src-listen'),
-            L: $('gt-res-listen'),
-            M: $('gt-speech'),
-            P: $$('#gt-pb-star .goog-toolbar-button')[0]
-        };
+            if (!key) { return; }
 
-        // [alt] + [shift] + key
-        this.altShiftTarget = {
-            L: $('gt-src-listen')
-        };
+            // [alt] + [shift] + key
+            if (btn.shift === true) {
+                me.altShiftTarget[key] = elm;
+                return;
+            }
+            // [alt] + key
+            if (btn.alt === true) {
+                me.altTarget[key] = elm;
+            }
+        });
 
         // cache keys regexp
-        for (key in this.altTarget) { keys += key }
-        for (key in this.altShiftTarget) { if (keys.indexOf(key) < 0) {keys += key} }
+        for (key in me.altTarget) { keys += key }
+        for (key in me.altShiftTarget) { if (keys.indexOf(key) < 0) {keys += key} }
         r.compile('^[' + keys + ']$', 'i');
-        this.keysRegExp = r;
+        me.keysRegExp = r;
     },
 
     /**
@@ -115,7 +219,7 @@ var extCS = {
                 return;
             }
 
-            btn = this.getTargetButton(evt);
+            btn = this.getAssignedButton(evt);
 
             if (btn) {
                 this.emulateClick(btn);
@@ -124,8 +228,14 @@ var extCS = {
         }.bind(this);
     },
 
-    getTargetButton: function(evt) {
-        var key = String.fromCharCode(evt.keyCode),
+    /**
+     * return target button assigned the event
+     * @param  {Event}  evt  triggered event
+     * @return {Object} button (return undefined if not assigned any)
+     */
+    getAssignedButton: function(evt) {
+        var me =this,
+            key = String.fromCharCode(evt.keyCode).toLowerCase(),
             btn;
 
         // shift + enter => translate button
@@ -134,14 +244,14 @@ var extCS = {
         }
 
         // continue only if [alt] + (registered key) is pressed
-        if (!key.match(this.keysRegExp) || !evt.altKey) { return; }
+        if (!key.match(me.keysRegExp) || !evt.altKey) { return; }
 
         if (evt.shiftKey) {
-            btn = this.altShiftTarget[key];
+            btn = me.altShiftTarget[key];
         }
 
         if (!btn) {
-            btn = this.altTarget[key];
+            btn = me.altTarget[key];
         }
 
         return btn;
@@ -160,7 +270,32 @@ var extCS = {
             de(me['mouseup']);
             de(me['mouseout']);
         }
+    },
+
+
+    /**
+     * capitalize string
+     * @param  {String} str  target string
+     * @return {String} capitalized string
+     */
+    capitalize: function(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    },
+
+    /**
+     * iterates through an object and invokes the given callback function for each iteration
+     * @param {Object}   obj  object to iterate
+     * @param {Function} fn   callback function
+     */
+    iterateObject: function(obj, fn) {
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (fn.call(obj, key, obj[key], obj) === false) {
+                    return;
+                }
+            }
+        }
     }
 };
 
-extCS.init();
+KS4GT.init();
