@@ -15,7 +15,7 @@
     position: relative;
     text-decoration: underline;
     @content;
-    content: $shortcutKey;
+    content: attr(data-key-navi);
 }
 
 @mixin key-nav-h($shortcutKey) {
@@ -51,44 +51,38 @@ body {
     counter-reset: langs;
 }
 
+// language swap
 #gt-swap::after {
     @include key-nav-v-num("(0)");
 }
-
+// language select
 #gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit)::after {
     @include key-nav-h("(" counter(langs) ")");
     counter-increment: langs;
 }
 
-#gt-sl-gms {
-    .goog-flat-menu-button-dropdown::after {
-        @include key-nav-for-langlist("(8)");
-    }
-}
+// source language list
+// target language list
+#gt-sl-gms,
 #gt-tl-gms {
     .goog-flat-menu-button-dropdown::after {
-        @include key-nav-for-langlist("(9)");
+        @include key-nav-for-langlist("");
     }
 }
 
 #gt-clear::after {
-    @include key-nav-v-char("(d)", -7px);
+    @include key-nav-v-char("", -7px);
 }
-#gt-speech::after {
-    @include key-nav-v-char("(m)");
-}
-#gt-src-listen::after {
-    @include key-nav-v-char("(L or k)");
-}
-#gt-res-select::after {
-    @include key-nav-v-char("(a)");
-}
-#gt-res-copy::after {
-    @include key-nav-v-char("(c)");
-}
-#gt-res-listen::after {
-    @include key-nav-v-char("(l)");
-}
-#gt-pb-star .goog-toolbar-button::after {
-    @include key-nav-v-char("(p)");
+
+#gt-speech,
+#gt-src-roman,
+#gt-src-listen,
+#gt-res-select,
+#gt-res-copy,
+#gt-res-listen,
+#gt-pb-star .goog-toolbar-button,
+#gt-res-roman {
+    &::after {
+        @include key-nav-v-char("");
+    }
 }

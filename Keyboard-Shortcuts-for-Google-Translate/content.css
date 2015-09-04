@@ -10,7 +10,7 @@
 body {
   counter-reset: langs; }
 
-/* line 54, ../sass/content.scss */
+/* line 55, ../sass/content.scss */
 #gt-swap::after {
   color: #aaa;
   font-weight: normal;
@@ -18,31 +18,20 @@ body {
   text-decoration: underline;
   display: block;
   text-align: center;
-  content: "(0)";
+  content: attr(data-key-navi);
   top: -13px; }
 
-/* line 58, ../sass/content.scss */
+/* line 59, ../sass/content.scss */
 #gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit)::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
   text-decoration: underline;
-  content: "(" counter(langs) ")";
+  content: attr(data-key-navi);
   counter-increment: langs; }
 
-/* line 64, ../sass/content.scss */
-#gt-sl-gms .goog-flat-menu-button-dropdown::after {
-  color: #aaa;
-  font-weight: normal;
-  position: relative;
-  text-decoration: underline;
-  display: block;
-  text-align: center;
-  left: -7px;
-  content: "(8)";
-  top: -5px; }
-
-/* line 69, ../sass/content.scss */
+/* line 68, ../sass/content.scss */
+#gt-sl-gms .goog-flat-menu-button-dropdown::after,
 #gt-tl-gms .goog-flat-menu-button-dropdown::after {
   color: #aaa;
   font-weight: normal;
@@ -51,10 +40,10 @@ body {
   display: block;
   text-align: center;
   left: -7px;
-  content: "(9)";
+  content: attr(data-key-navi);
   top: -5px; }
 
-/* line 74, ../sass/content.scss */
+/* line 73, ../sass/content.scss */
 #gt-clear::after {
   color: #aaa;
   font-weight: normal;
@@ -63,11 +52,18 @@ body {
   display: block;
   text-align: center;
   font-size: smaller;
-  content: "(d)";
+  content: attr(data-key-navi);
   top: -7px; }
 
-/* line 77, ../sass/content.scss */
-#gt-speech::after {
+/* line 85, ../sass/content.scss */
+#gt-speech::after,
+#gt-src-roman::after,
+#gt-src-listen::after,
+#gt-res-select::after,
+#gt-res-copy::after,
+#gt-res-listen::after,
+#gt-pb-star .goog-toolbar-button::after,
+#gt-res-roman::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
@@ -75,65 +71,5 @@ body {
   display: block;
   text-align: center;
   font-size: smaller;
-  content: "(m)";
-  top: -12px; }
-
-/* line 80, ../sass/content.scss */
-#gt-src-listen::after {
-  color: #aaa;
-  font-weight: normal;
-  position: relative;
-  text-decoration: underline;
-  display: block;
-  text-align: center;
-  font-size: smaller;
-  content: "(L or k)";
-  top: -12px; }
-
-/* line 83, ../sass/content.scss */
-#gt-res-select::after {
-  color: #aaa;
-  font-weight: normal;
-  position: relative;
-  text-decoration: underline;
-  display: block;
-  text-align: center;
-  font-size: smaller;
-  content: "(a)";
-  top: -12px; }
-
-/* line 86, ../sass/content.scss */
-#gt-res-copy::after {
-  color: #aaa;
-  font-weight: normal;
-  position: relative;
-  text-decoration: underline;
-  display: block;
-  text-align: center;
-  font-size: smaller;
-  content: "(c)";
-  top: -12px; }
-
-/* line 89, ../sass/content.scss */
-#gt-res-listen::after {
-  color: #aaa;
-  font-weight: normal;
-  position: relative;
-  text-decoration: underline;
-  display: block;
-  text-align: center;
-  font-size: smaller;
-  content: "(l)";
-  top: -12px; }
-
-/* line 92, ../sass/content.scss */
-#gt-pb-star .goog-toolbar-button::after {
-  color: #aaa;
-  font-weight: normal;
-  position: relative;
-  text-decoration: underline;
-  display: block;
-  text-align: center;
-  font-size: smaller;
-  content: "(p)";
+  content: attr(data-key-navi);
   top: -12px; }
