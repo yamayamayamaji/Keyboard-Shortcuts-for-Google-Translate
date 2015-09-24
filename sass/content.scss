@@ -9,7 +9,7 @@
 @charset "utf-8";
 
 //mixins
-@mixin key-nav($shortcutKey) {
+@mixin key-nav() {
     color: #aaa;
     font-weight: normal;
     position: relative;
@@ -18,11 +18,11 @@
     content: attr(data-key-navi);
 }
 
-@mixin key-nav-h($shortcutKey) {
-    @include key-nav($shortcutKey);
+@mixin key-nav-h() {
+    @include key-nav();
 }
-@mixin key-nav-v($shortcutKey, $top) {
-    @include key-nav($shortcutKey) {
+@mixin key-nav-v($top) {
+    @include key-nav() {
         display: block;
         text-align: center;
         @content;
@@ -30,34 +30,30 @@
     top: $top;
 }
 
-@mixin key-nav-v-char($shortcutKey, $top: -12px) {
-    @include key-nav-v($shortcutKey, $top) {
+@mixin key-nav-v-char($top: 0) {
+    @include key-nav-v($top) {
         font-size: smaller;
     }
 }
-@mixin key-nav-v-num($shortcutKey, $top: -13px) {
-    @include key-nav-v($shortcutKey, $top) {
+@mixin key-nav-v-num($top: 0) {
+    @include key-nav-v($top) {
         @content;
     }
 }
-@mixin key-nav-for-langlist($shortcutKey, $top: -5px) {
-    @include key-nav-v($shortcutKey, $top) {
+@mixin key-nav-for-langlist($top: 0) {
+    @include key-nav-v($top) {
         left: -7px;
     }
 }
 
 
-body {
-    counter-reset: langs;
-}
-
 // language swap
 #gt-swap::after {
-    @include key-nav-v-num("(0)");
+    @include key-nav-v-num(-13px);
 }
 // language select
 #gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit)::after {
-    @include key-nav-h("(" counter(langs) ")");
+    @include key-nav-h();
     counter-increment: langs;
 }
 
@@ -66,12 +62,22 @@ body {
 #gt-sl-gms,
 #gt-tl-gms {
     .goog-flat-menu-button-dropdown::after {
-        @include key-nav-for-langlist("");
+        @include key-nav-for-langlist(-5px);
+    }
+}
+
+#gt-lang-submit {
+    &::after {
+        @include key-nav-v-char(9px);
+        display: none;
+    }
+    &:hover::after {
+        display: inline-block;
     }
 }
 
 #gt-clear::after {
-    @include key-nav-v-char("", -7px);
+    @include key-nav-v-char(-7px);
 }
 
 #gt-speech,
@@ -83,6 +89,6 @@ body {
 #gt-pb-star .goog-toolbar-button,
 #gt-res-roman {
     &::after {
-        @include key-nav-v-char("");
+        @include key-nav-v-char(-12px);
     }
 }

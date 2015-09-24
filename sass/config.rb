@@ -3,7 +3,7 @@ output_style = :nested
 
 sass_path = cur_dir
 
-resource_dir = File.join('..', 'Keyboard-Shortcuts-for-Google-Translate')
+resource_dir = File.join('..', 'dev')
 css_dir = resource_dir
 
 images_dir = File.join(resource_dir, 'images')

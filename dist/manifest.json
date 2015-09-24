@@ -1,0 +1,53 @@
+{
+  "name": "Keyboard Shortcuts for Google Translate",
+  "short_name": "KS4GT",
+
+  "version": "2.0.0.0",
+
+  "description": "Provides keyboard shortcuts in the Google Translate™ page.",
+
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "lib/qwest.min.js",
+      "background.js"
+    ]
+  },
+
+  "content_scripts": [ {
+    "all_frames": true,
+    "matches": [ "*://*/*" ],
+    "include_globs": [ "*://translate.google.*/*" ],
+    "js": [ "content.js" ]
+  } ],
+
+  "content_security_policy": "script-src 'self'; object-src 'none'; img-src 'self' data: chrome-extension-resource:",
+
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+
+  "manifest_version": 2,
+
+  "page_action": {
+    "default_icon": "images/icon-19.png",
+    "default_title": "shortcut keys are enabled"
+  },
+
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+
+  "web_accessible_resources": [
+    "content.css",
+    "buttons_default.min.json"
+  ]
+}

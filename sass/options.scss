@@ -1,0 +1,126 @@
+/*!
+ * options.scss
+ * in "Keyboard Shortcuts for Google Translate" (Google Chrome Extension)
+ * https://github.com/yamayamayamaji/Keyboard-Shortcuts-for-Google-Translate
+ * Copyright 2013, Ryosuke Yamaji
+ *
+ * License: MIT
+ */
+@charset "utf-8";
+
+$fineColor: #6a6;
+$invalidColor: #f66;
+
+@mixin cell($width: auto) {
+    display: inline-block;
+    vertical-align: middle;
+    width: $width;
+}
+
+%clearfix {
+    clear: both;
+    content: "";
+    display: block;
+}
+
+body {
+    margin-top: 0;
+}
+
+.contents {
+    $width-and-count: 250px 2;
+    -webkit-columns: $width-and-count;
+    columns: $width-and-count;
+    min-width: 550px;
+}
+
+.toolbar {
+    padding: 3px;
+
+    &.tb-footer {
+        position: fixed;
+        bottom: 0;
+    }
+
+    .tb-item {
+        display: inline-block;
+
+        &.tb-item-left {
+            float: left;
+        }
+        &.tb-item-right {
+            float: right;
+        }
+    }
+
+    &::after {
+        @extend %clearfix;
+    }
+}
+
+#status {
+    font-size: small;
+
+    &.good {
+        color: $fineColor;
+    }
+    &.bad {
+        color: $invalidColor;
+    }
+}
+
+#reset-btn {
+    text-decoration: underline;
+    color: #af9036;
+    cursor: pointer;
+}
+
+.group-wrap {
+    // margin-bottom: 20px;
+    -webkit-column-break-inside: avoid;
+    break-inside: avoid-column;
+    // -webkit-column-break-after: always;
+    // break-after: column;
+}
+.row-wrap {
+    margin: 0;
+    padding: 3px;
+    height: 26px;
+    font-size: inherit;
+
+    &:nth-of-type(even) {
+        background-color: #f6f6f6;
+    }
+}
+.btn-name-wrap {
+    @include cell(80px);
+    font-weight: bold;
+    margin: 0 5px;
+}
+.key-inputer-wrap {
+    @include cell();
+    margin: 0 5px;
+}
+.with-shift-wrap {
+    @include cell();
+    margin: 0 10px;
+}
+
+.group-title {
+    margin: 0;
+    padding: 5px;
+    background-color: #eee;
+    font-size: medium;
+    font-weight: bold;
+}
+
+.key-inputer-txt {
+    text-align: center;
+    width: 26px;
+
+    &:invalid {
+        background-color: $invalidColor;
+    }
+}
+.with-shift-cb {
+}

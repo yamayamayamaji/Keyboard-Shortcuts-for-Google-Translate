@@ -2,28 +2,26 @@
   "name": "Keyboard Shortcuts for Google Translate",
   "short_name": "KS4GT",
 
-  "version": "1.3.4.0",
+  "version": "2.0.0.0",
 
-  "description": "This extension set keyboard shortcuts in Google Translate page.",
+  "description": "Provides keyboard shortcuts in the Google Translate™ page.",
 
   "background": {
     "persistent": false,
     "scripts": [
-      "lib/underscore.min.js",
-      "lib/underscore.deferred.min.js",
-      "Extension.js",
+      "lib/qwest.min.js",
       "background.js"
     ]
   },
 
   "content_scripts": [ {
     "all_frames": true,
-    "matches": ["*://*/*"],
-    "include_globs": ["*://translate.google.*/*"],
-    "js": ["content.js"]
+    "matches": [ "*://*/*" ],
+    "include_globs": [ "*://translate.google.*/*" ],
+    "js": [ "content.js" ]
   } ],
 
-  "content_security_policy": "script-src 'self'; object-src 'none'; img-src 'self'",
+  "content_security_policy": "script-src 'self'; object-src 'none'; img-src 'self' data: chrome-extension-resource:",
 
   "icons": {
     "16": "images/icon-16.png",
@@ -39,10 +37,17 @@
   },
 
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage"
   ],
 
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+
   "web_accessible_resources": [
-    "content.css"
+    "content.css",
+    "buttons_default.min.json"
   ]
 }
