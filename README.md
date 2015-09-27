@@ -53,4 +53,6 @@ default settings are
 * result listen -> Option + L  
 * save to phrasebook -> Option + P  
 * translate -> Shift + Enter  
-
+  
+If you want to customize keys, click the options link which is shown on the extensions management page at chrome://extensions
+or right click extension's icon at address bar.  
