@@ -56,3 +56,4 @@ default settings are
   
 If you want to customize keys, click the options link which is shown on the extensions management page at chrome://extensions
 or right click extension's icon at address bar.  
+![Options Link ScreenShot](https://raw.github.com/yamayamayamaji/Keyboard-Shortcuts-for-Google-Translate/master/ss-readme2.png)
