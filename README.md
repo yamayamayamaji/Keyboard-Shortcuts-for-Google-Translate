@@ -51,7 +51,10 @@ donations are greatly appreciated.
 <!--- pledgie (paypal) donation -->
 <a href='https://pledgie.com/campaigns/30417'><img alt='Click here to lend your support to: Keyboard Shortcuts for Google Translate and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30417.png?skin_name=chrome' border='0' ></a>  
 <!--- blockchain donation -->
-<div style="font-size:16px;margin:10px 0;max-width:150px;height:auto;" class="blockchain-btn"
+<a href="http://yamayamayamaji.github.io/Keyboard-Shortcuts-for-Google-Translate">Bitcoin donation</a>
+(bottom of the linked page)
+
+<!-- <div style="font-size:16px;margin:10px 0;max-width:150px;height:auto;" class="blockchain-btn"
      data-address="185oE4UCF2QN7YEaowNRQGLJjxobz4UAqi"
      data-shared="false">
     <div class="blockchain stage-begin">
@@ -72,4 +75,4 @@ donations are greatly appreciated.
     </div>
 </div>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-<script type="text/javascript" src="https://blockchain.info/Resources/wallet/pay-now-button.js"></script>
+<script type="text/javascript" src="https://blockchain.info/Resources/wallet/pay-now-button.js"></script> -->
