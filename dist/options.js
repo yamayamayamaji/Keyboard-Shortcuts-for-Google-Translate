@@ -65,7 +65,7 @@ var KS4GT_OP_view = {
      * insert base dom to <body>
      */
     drawBase: function() {
-        document.body.insertAdjacentHTML('beforeend', this.baseTmpl());
+        document.body.insertAdjacentHTML('afterbegin', this.baseTmpl());
     },
 
     /**
