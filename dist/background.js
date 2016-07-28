@@ -7,6 +7,25 @@
  * License: MIT
  */
 
+/**
+ * When the extension is installed or upgraded
+ * Replace all rules with a new rule
+ */
+chrome.runtime.onInstalled.addListener(function() {
+    var dc = chrome.declarativeContent;
+    dc.onPageChanged.removeRules(undefined, function() {
+        dc.onPageChanged.addRules([{
+            conditions: [
+                new dc.PageStateMatcher({
+                    pageUrl: { hostContains: 'translate.google.' },
+                })
+            ],
+            actions: [ new dc.ShowPageAction() ]
+        }]);
+    });
+});
+
+
 KS4GT_BP = {
     /**
      * initialize extension background script
@@ -33,9 +52,6 @@ KS4GT_BP = {
         },
         platformInfo: function(opt) {
             return this.getPlatformInfo();
-        },
-        showPageAction: function(opt, sender) {
-            return this.showPageAction(sender.tab.id);
         }
     },
 
@@ -88,21 +104,6 @@ KS4GT_BP = {
                     return;
                 }
             }
-        }
-    },
-
-    /**
-     * show pageAction icon
-     * @param  {Integer} tabId　id of the target tab
-     */
-    showPageAction: function(tabId) {
-        var res = 'success';
-        try {
-            chrome.pageAction.show(tabId);
-        } catch (err) {
-            res = 'failed:' + err;
-        } finally {
-            return res;
         }
     },
 

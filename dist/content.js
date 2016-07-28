@@ -36,9 +36,7 @@ var KS4GT_CS = {
                 // load default settings from json file
                 defaultSettings: null,
                 // load user settings from extension sync storage
-                userSettings: null,
-                // show pageAction icon
-                showPageAction: null
+                userSettings: null
             },
             function(res) {
                 me.setupRecievers(res.defaultSettings);
