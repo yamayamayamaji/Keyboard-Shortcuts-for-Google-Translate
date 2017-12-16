@@ -141,17 +141,10 @@ KS4GT_BP = {
      */
     getDefaultSettings: function() {
 
-        return new Promise(function(resolve, reject) {
-            qwest.get(chrome.extension.getURL('default_settings.min.json'))
-            .then(function(xhr, res) {
-                try{
-                    resolve(JSON.parse(res));
-                } catch (e) {
-                    console.log(e);
-                    reject(e);
-                }
-            });
-        });
+        return fetch(chrome.extension.getURL('default_settings.min.json'))
+                .then(function(res) {
+                    return res.json();
+                });
     },
 
     /**
