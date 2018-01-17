@@ -213,7 +213,7 @@ var KS4GT_CS = {
             var rcv, t;
 
             // shift + enter => translate button
-            if (evt.shiftKey && evt.keyCode == 13) {
+            if (evt.shiftKey && evt.key == 'Enter') {
                 window.setTimeout(function() {
                     translateRcv.elm.focus();
                 }, 0);
@@ -236,7 +236,7 @@ var KS4GT_CS = {
      */
     getAssignedReciever: function(evt) {
         var me = this,
-            key = String.fromCharCode(evt.keyCode).toLowerCase(),
+            key = evt.key.toLowerCase(),
             reciever;
 
         // continue only if [alt] + (registered key) is pressed
