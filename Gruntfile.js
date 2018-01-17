@@ -7,7 +7,8 @@ module.exports = function(grunt) {
         dir: {
             dev: 'dev',
             dist: 'dist',
-            sass: 'sass'
+            sass: 'sass',
+            zipStore: 'ChromeWebStore',
         },
 
         // タスクの設定
@@ -74,6 +75,13 @@ module.exports = function(grunt) {
                 files: [ '<%= dir.dev %>/*.json', '!<%= dir.dev %>/*.min.json', '!<%= dir.dev %>/manifest.json' ],
                 tasks: [ 'jsonmin:dev' ]
             }
+        },
+
+        zip: {
+            deploy: {
+                src: [ '<%= dir.dist %>/**' ],
+                dest: '<%= dir.zipStore %>/Keyboard-Shortcuts-for-Google-Translate.zip'
+            }
         }
     });
 
@@ -86,5 +94,5 @@ module.exports = function(grunt) {
 
     // デフォルトタスクの設定
     grunt.registerTask('default', ['watch']);
-    grunt.registerTask('deploy', ['clean:dist', 'copy:deploy', 'sass:dist', 'jsonmin:dist']);
+    grunt.registerTask('deploy', ['clean:dist', 'copy:deploy', 'sass:dist', 'jsonmin:dist', 'zip']);
 };
