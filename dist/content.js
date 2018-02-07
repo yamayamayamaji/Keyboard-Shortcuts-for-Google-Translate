@@ -13,8 +13,7 @@
  * chrome extension content script manager
  * @type {Object}
  */
-var KS4GT_CS = {
-    noop: function() {},
+const KS4GT_CS = {
     mouseEvent: [],
 
     altTarget: {},
@@ -28,7 +27,7 @@ var KS4GT_CS = {
      * ready before initialize
      */
     ready: function() {
-        var me = this;
+        const me = this;
 
         if (me.isReady) { return; }
 
@@ -36,11 +35,14 @@ var KS4GT_CS = {
                 // load default settings from json file
                 defaultSettings: null,
                 // load user settings from extension sync storage
-                userSettings: null
+                userSettings: null,
+                // get runtime platform infomation
+                platformInfo: null
             },
             function(res) {
-                me.setupRecievers(res.defaultSettings);
-                me.userSettings = res.userSettings;
+                me.setupRecievers(res.defaultSettings || {});
+                me.userSettings = res.userSettings || {};
+                me.platformInfo = res.platformInfo || {};
 
                 me.isReady = true;
                 me.onReady();
@@ -52,7 +54,7 @@ var KS4GT_CS = {
      * initialize extension content script
      */
     init: function() {
-        var me = this;
+        const me = this;
 
         if (!me.isReady) {
             me.onReady = me.init.bind(me);
@@ -76,14 +78,14 @@ var KS4GT_CS = {
      * @param  {Object} settingsJson JSON of default settings
      */
     setupRecievers: function(settingsJson) {
-        var me = this,
+        const me = this,
             $ = document.querySelectorAll.bind(document);
 
         // add key:value pair under listed
         //  clickTarget: dom element matches selector and idx in settings
         //  captionTarget: dom element matches selector and idx in settings
         me.iterateObject(settingsJson, function(name, settings) {
-            var cli = settings.clickTarget,
+            const cli = settings.clickTarget,
                 cap = settings.captionTarget;
 
             settings.elm = $(cli.selector)[cli.idx || 0];
@@ -102,12 +104,12 @@ var KS4GT_CS = {
      * apply user custom settings to extension
      */
     applyUserSettings: function() {
-        var me = this,
+        const me = this,
             userSettings = me.userSettings;
 
         // apply user customization to default settings
         me.iterateObject(userSettings, function(name, setting) {
-            var rcv = me.recievers[name];
+            const rcv = me.recievers[name];
 
             // skip if the target element no longer exists
             if (!rcv) { return; }
@@ -124,10 +126,10 @@ var KS4GT_CS = {
      * display shortcut key character to each target
      */
     setKeyCaption: function() {
-        var me = this;
+        const me = this;
 
         me.iterateObject(me.recievers, function(name, rcv) {
-            var key = rcv.shortcutKey;
+            let key = rcv.shortcutKey;
 
             // continue if shortcut key is not assigned
             if (!key) { return; }
@@ -146,7 +148,7 @@ var KS4GT_CS = {
      * @param {String} url
      */
     injectStyleSheet: function(url) {
-        var link = document.createElement('link'),
+        const link = document.createElement('link'),
             lastLink = document.querySelectorAll('link:last-of-type')[0];
 
         link.rel = 'stylesheet';
@@ -159,9 +161,9 @@ var KS4GT_CS = {
      * create mouse event emulators and set to property of KS4GT_CS
      */
     setupMouseEventEmulator: function() {
-        var events = ['mousedown', 'mouseup', 'mouseout', 'mouseover', 'click'];
+        const events = ['mousedown', 'mouseup', 'mouseout', 'mouseover', 'click'];
 
-        for (var i = 0, e; e = events[i++];) {
+        for (let i = 0, e; e = events[i++];) {
             this.mouseEvent[e] =  document.createEvent('MouseEvents');
             this.mouseEvent[e].initEvent(e, true, false);
         }
@@ -175,11 +177,12 @@ var KS4GT_CS = {
      * }}
      */
     initKeyMaps: function() {
-        var me = this,
-            r = new RegExp(), keys = '', key;
+        const me = this,
+            re = new RegExp();
+        let keys = '';
 
         me.iterateObject(me.recievers, function(name, rcv) {
-            var key = rcv.shortcutKey,
+            const key = rcv.shortcutKey,
                 reciever = { elm: rcv.elm, cmd: rcv.cmd };
 
             if (!key) { return; }
@@ -196,21 +199,21 @@ var KS4GT_CS = {
         });
 
         // cache keys regexp
-        for (key in me.altTarget) { keys += key }
-        for (key in me.altShiftTarget) { if (keys.indexOf(key) < 0) {keys += key} }
-        r.compile('^[' + keys + ']$', 'i');
-        me.keysRegExp = r;
+        for (let key in me.altTarget) { keys += key }
+        for (let key in me.altShiftTarget) { if (keys.indexOf(key) < 0) {keys += key} }
+        re.compile('^[' + keys + ']$', 'i');
+        me.keysRegExp = re;
     },
 
     /**
      * set listeners for shortcut key event
      */
     listenKeyEvent: function() {
-        var me = this,
+        const me = this,
             translateRcv = me.recievers.translate;
 
         document.onkeydown = function(evt) {
-            var rcv, t;
+            let rcv, t;
 
             // shift + enter => translate button
             if (evt.shiftKey && evt.key == 'Enter') {
@@ -235,12 +238,29 @@ var KS4GT_CS = {
      * @return {Object} reciver info (return undefined if not assigned any)
      */
     getAssignedReciever: function(evt) {
-        var me = this,
-            key = evt.key.toLowerCase(),
+        const me = this,
+            pivotKeyPressed = (me.platformInfo.os === chrome.runtime.PlatformOs.MAC) ?
+                                evt.altKey || evt.ctrlKey : evt.altKey
+
+        if (!pivotKeyPressed) { return; }
+
+        let key = evt.key.toLowerCase(),
             reciever;
 
-        // continue only if [alt] + (registered key) is pressed
-        if (!key.match(me.keysRegExp) || !evt.altKey) { return; }
+        // If there is no shortcut key matching the input character
+        // Look for a shortcut key that matches the physical key
+        // (on a QWERTY layout keyboard)
+        if (!key.match(me.keysRegExp)) {
+            const code = evt.code;
+            if (code.match(/^(Key|Digit|Numpad)/)) {
+                const physicalKey = code.slice(-1).toLowerCase();
+                if (physicalKey.match(me.keysRegExp)) {
+                    key = physicalKey;
+                } else {
+                    return;
+                }
+            }
+        }
 
         if (evt.shiftKey) {
             reciever = me.altShiftTarget[key];
@@ -258,10 +278,14 @@ var KS4GT_CS = {
      * @param  {Srting} cmd name of emulate event
      * @param  {Object} elm HTML Element
      */
-    emulate: function(cmd, elm) {
+    emulate: function(cmd = 'mouseDownUp', elm) {
         if (elm) {
-            var me = this,
-                cmd = cmd || 'mouseDownUp' ;
+            const me = this;
+
+            if (!cmd) {
+                cmd = 'mouseDownUp';
+            }
+
             me['emulate' + me.camelize(cmd)](elm);
         }
     },
@@ -272,7 +296,7 @@ var KS4GT_CS = {
      */
     emulateMouseDownUp: function(elm) {
         if (elm) {
-            var de = elm.dispatchEvent.bind(elm),
+            const de = elm.dispatchEvent.bind(elm),
                 me = this.mouseEvent;
             de(me['mouseover']);
             de(me['mousedown']);
@@ -307,7 +331,7 @@ var KS4GT_CS = {
      * @param {Function} fn   callback function
      */
     iterateObject: function(obj, fn) {
-        for (var key in obj) {
+        for (let key in obj) {
             if (obj.hasOwnProperty(key)) {
                 if (fn.call(obj, key, obj[key], obj) === false) {
                     return;
@@ -318,7 +342,7 @@ var KS4GT_CS = {
 
     camelize: function(str) {
         return str.replace(/(?:^|[-_])(\w)/g, function(_, c) {
-          return c ? c.toUpperCase() : '';
+            return c ? c.toUpperCase() : '';
         });
     }
 };

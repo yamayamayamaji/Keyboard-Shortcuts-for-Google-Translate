@@ -2,11 +2,11 @@
   "name": "Keyboard Shortcuts for Google Translate",
   "short_name": "KS4GT",
 
-  "version": "2.1.1.0",
+  "version": "2.2.0.0",
 
   "description": "Provides keyboard shortcuts in the Google Translate™ page.",
 
-  "minimum_chrome_version": "41",
+  "minimum_chrome_version": "49",
 
   "background": {
     "persistent": false,

@@ -96,6 +96,7 @@ const KS4GT_OP_view = {
         const me = this,
             html =
 `<div class="toolbar">
+  <div class="tb-item tb-item-left note">Pivot is ${me.pivotKey}</div>
   <div id="${me.RESET_BTN_ID}" class="tb-item tb-item-right">reset settings</div>
 </div>
 <div class="contents">
@@ -132,7 +133,7 @@ const KS4GT_OP_view = {
     <input type="hidden" name="${me.RCV_ID_NAME}" value="${name}">
   </div>
   <div class="key-inputer-wrap">
-    ${me.PIVOT_KEY} + 
+    Pivot + 
     <input type="text" name="${me.SHORTCUT_KEY_NAME}" class="key-inputer-txt"
     value="${settings.shortcutKey}" maxlength="1">
   </div>
@@ -213,8 +214,9 @@ const KS4GT_OP_view = {
  * chrome extension options page manager
  * @type {Object}
  */
-    acceptableKeyRegExp: /^[0-9a-z]?$/,
 const KS4GT_OP = {
+    // acceptableKeyRegExp: /^[0-9a-z]?$/,
+    acceptableKeyRegExp: /^.?$/,
     userSettings: {},
     recievers: {},
 
@@ -261,7 +263,7 @@ const KS4GT_OP = {
         }
 
         pivotKey = (me.platformInfo.os === chrome.runtime.PlatformOs.MAC) ?
-                    'Option' : 'Alt';
+                    '[Option] or [Control]' : '[Alt]';
 
         // initialize view
         me.view.init({
@@ -416,8 +418,8 @@ const KS4GT_OP = {
 
             // validate shortcut key
             if (!val.match(me.acceptableKeyRegExp)) {
-                // elm.setCustomValidity('shortcut key must be alphanumeric 1 char');
-                elm.setCustomValidity('invalid shortcut key. only [a-z0-9] is OK');
+                // elm.setCustomValidity('invalid shortcut key. only [a-z0-9] is OK');
+                elm.setCustomValidity('invalid shortcut key.');
                 invalidElements.push(elm);
             } else {
                 elm.setCustomValidity('');

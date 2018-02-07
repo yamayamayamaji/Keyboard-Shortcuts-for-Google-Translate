@@ -10,10 +10,10 @@
 "use strict";
 
 // utility functions
-var $ = document.getElementById.bind(document),
+const $ = document.getElementById.bind(document),
     $$ = document.querySelectorAll.bind(document),
     iterateObject = function(obj, fn) {
-        for (var key in obj) {
+        for (let key in obj) {
             if (obj.hasOwnProperty(key)) {
                 if (fn.call(obj, key, obj[key], obj) === false) {
                     return;
@@ -27,7 +27,7 @@ var $ = document.getElementById.bind(document),
  * options page view manager
  * @type {Object}
  */
-var KS4GT_OP_view = {
+const KS4GT_OP_view = {
     STATUS_BOX_ID:     'status',
     SAVE_BTN_ID:       'save-btn',
     RESET_BTN_ID:      'reset-btn',
@@ -37,7 +37,7 @@ var KS4GT_OP_view = {
     SHIFT_NAME:        'with-shift',
 
     // default combination key used with shortcut key
-    PIVOT_KEY: 'Alt',
+    pivotKey: 'Alt',
 
     /**
      * initialize view contents
@@ -46,15 +46,14 @@ var KS4GT_OP_view = {
      * @param  {Object} config.customSettings   custom setting values
      * @param  {String} config.pivotKey         string which represent pivot key
      */
-    init: function(config) {
-        var me = this,
-            config = config || {},
+    init: function(config = {}) {
+        const me = this,
             def = config.defaultSettings || {},
             custom = config.customSettings || {},
-            pivot = config.pivotKey;
+            pivotKey = config.pivotKey;
 
-        if (pivot) {
-            me.PIVOT_KEY = pivot;
+        if (pivotKey) {
+            me.pivotKey = pivotKey;
         }
 
         me.drawBase();
@@ -65,26 +64,26 @@ var KS4GT_OP_view = {
      * insert base dom to <body>
      */
     drawBase: function() {
-        document.body.insertAdjacentHTML('afterbegin', this.baseTmpl());
+        document.body.insertAdjacentHTML('afterbegin', this.baseHtml());
     },
 
     /**
      * insert user option setting tools
      */
     drawSettingTools: function(defaultSettings, customSettings) {
-        var me = this,
+        const me = this,
             groups = {};
 
         iterateObject(defaultSettings, function(name, settings) {
-            var g = settings.group;
+            const g = settings.group;
 
             if (!groups[g]) { groups[g] = []; }
             Object.assign(settings, customSettings[name]);
-            groups[g].push(me.settingsTmpl(name, settings));
+            groups[g].push(me.settingsHtml(name, settings));
         });
 
         iterateObject(groups, function(group, html) {
-            var container = $(group);
+            const container = $(group);
             container && container.insertAdjacentHTML('beforeend', html.join(''));
         });
     },
@@ -93,10 +92,11 @@ var KS4GT_OP_view = {
      * returns an HTML fragment of this template with the specified values applied
      * @return {String} HTML fragment
      */
-    baseTmpl: function() {
-        var me = this,
-            h =
+    baseHtml: function() {
+        const me = this,
+            html =
 `<div class="toolbar">
+  <div class="tb-item tb-item-left note">Pivot is ${me.pivotKey}</div>
   <div id="${me.RESET_BTN_ID}" class="tb-item tb-item-right">reset settings</div>
 </div>
 <div class="contents">
@@ -115,7 +115,7 @@ var KS4GT_OP_view = {
   <button id="${me.SAVE_BTN_ID}" class="tb-item tb-item-right">Save</button>
 </div>`
 
-        return h;
+        return html;
     },
 
     /**
@@ -124,16 +124,16 @@ var KS4GT_OP_view = {
      * @param  {Object} settings template values of reciever setting
      * @return {String}          HTML fragment
      */
-    settingsTmpl: function(name, settings) {
-        var me = this,
-            h =
+    settingsHtml: function(name, settings) {
+        const me = this,
+            html =
 `<h2 class="${me.ROW_CLS} row-wrap">
   <div class="rcv-name-wrap">
     ${settings.alias || name}
     <input type="hidden" name="${me.RCV_ID_NAME}" value="${name}">
   </div>
   <div class="key-inputer-wrap">
-    ${me.PIVOT_KEY} + 
+    Pivot + 
     <input type="text" name="${me.SHORTCUT_KEY_NAME}" class="key-inputer-txt"
     value="${settings.shortcutKey}" maxlength="1">
   </div>
@@ -144,11 +144,11 @@ var KS4GT_OP_view = {
   </div>
 </h2>`
 
-        return h;
+        return html;
     },
 
     findRow: function(clue) {
-        var elm = clue;
+        let elm = clue;
 
         while (!elm.classList.contains(this.ROW_CLS)) {
             elm = elm.parentElement;
@@ -180,7 +180,7 @@ var KS4GT_OP_view = {
         return $$('.' + this.ROW_CLS);
     },
 
-    getAllShorcutKeyElements: function() {
+    getAllShortcutKeyElements: function() {
         return $$('[name=' + this.SHORTCUT_KEY_NAME + ']');
     },
 
@@ -188,7 +188,7 @@ var KS4GT_OP_view = {
         return this.getRowItem(this.RCV_ID_NAME, row);
     },
 
-    getShorcutKeyElm: function(row) {
+    getShortcutKeyElm: function(row) {
         return this.getRowItem(this.SHORTCUT_KEY_NAME, row);
     },
 
@@ -200,8 +200,8 @@ var KS4GT_OP_view = {
         return this.getRcvIdElm(row).value;
     },
 
-    getShorcutKey: function(row) {
-        return this.getShorcutKeyElm(row).value;
+    getShortcutKey: function(row) {
+        return this.getShortcutKeyElm(row).value;
     },
 
     getWithShift: function(row) {
@@ -214,8 +214,9 @@ var KS4GT_OP_view = {
  * chrome extension options page manager
  * @type {Object}
  */
-var KS4GT_OP = {
-    acceptableKeyRegExp: /^[0-9a-z]?$/,
+const KS4GT_OP = {
+    // acceptableKeyRegExp: /^[0-9a-z]?$/,
+    acceptableKeyRegExp: /^.?$/,
     userSettings: {},
     recievers: {},
 
@@ -225,7 +226,7 @@ var KS4GT_OP = {
      * ready before initialize
      */
     ready: function() {
-        var me = this;
+        const me = this;
 
         if (me.isReady) { return; }
 
@@ -235,7 +236,7 @@ var KS4GT_OP = {
                 // load user settings from extension sync storage
                 userSettings: null,
                 // get runtime platform infomation
-                platformInfo: null,
+                platformInfo: null
             },
             function(res) {
                 me.recievers = res.defaultSettings || {};
@@ -252,8 +253,8 @@ var KS4GT_OP = {
      * initialize options page
      */
     init: function() {
-        var me = this,
-            pivotKey;
+        const me = this;
+        let pivotKey;
 
         if (!me.isReady) {
             me.onReady = me.init.bind(me);
@@ -262,7 +263,7 @@ var KS4GT_OP = {
         }
 
         pivotKey = (me.platformInfo.os === chrome.runtime.PlatformOs.MAC) ?
-                    'Option' : 'Alt';
+                    '[Option] or [Control]' : '[Alt]';
 
         // initialize view
         me.view.init({
@@ -274,8 +275,8 @@ var KS4GT_OP = {
         // set listeners
         me.view.getResetBtn().addEventListener('click', me.deleteUserSettings.bind(me));
         me.view.getSaveBtn().addEventListener('click', me.saveUserSettings.bind(me));
-        iterateObject(me.view.getAllShorcutKeyElements(), function(i, elm) {
-            elm.addEventListener('keyup', me.onShorcutKeyChange.bind(me));
+        iterateObject(me.view.getAllShortcutKeyElements(), function(i, elm) {
+            elm.addEventListener('keyup', me.onShortcutKeyChange.bind(me));
         });
     },
 
@@ -283,12 +284,11 @@ var KS4GT_OP = {
      * save user customize settings
      */
     saveUserSettings: function() {
-        var me = this,
+        const me = this,
             us = {},
-            msg = '',
-            invalidElements;
+            invalidElements = me.validate();
+        let msg = '';
 
-        invalidElements = me.validate();
         // if there are invalid input
         if (invalidElements && invalidElements.length) {
             iterateObject(invalidElements, function(i, elm) {
@@ -300,14 +300,12 @@ var KS4GT_OP = {
 
         // read user input values
         iterateObject(me.view.getAllRowElements(), function(idx, row) {
-            var name = me.view.getRcvId(row),
-                sk = me.view.getShorcutKey(row),
-                settings;
-
-            settings = {
-                shortcutKey: sk,
-                shift: me.view.getWithShift(row)
-            };
+            const name = me.view.getRcvId(row),
+                sk = me.view.getShortcutKey(row),
+                settings = {
+                    shortcutKey: sk,
+                    shift: me.view.getWithShift(row)
+                };
 
             us[name] = settings;
         });
@@ -322,7 +320,7 @@ var KS4GT_OP = {
      * delete user customize settings for resetting customization
      */
     deleteUserSettings: function() {
-        var me = this;
+        const me = this;
 
         // remove from chrome.storage.sync
         chrome.storage.sync.remove('userSettings', function() {
@@ -336,19 +334,19 @@ var KS4GT_OP = {
      * listener function of shortcut key onChange
      * @param  {DomEvent Object} evt  onChange event
      */
-    onShorcutKeyChange: function(evt) {
-        var me = this,
+    onShortcutKeyChange: function(evt) {
+        const me = this,
             elm = evt.target,
-            row = me.view.findRow(elm),
-            c;
+            row = me.view.findRow(elm);
+        let c;
 
-        elm.value = c = me.correctShorcutKey(elm.value);
+        elm.value = c = me.correctShortcutKey(elm.value);
 
         if (me.validate(row, elm.name).length) {
             // invalid input
             me.showMessage(elm.validationMessage, 'bad', 1500);
         } else if (evt.shiftKey) {
-            var cb = me.view.getBrother(me.view.SHIFT_NAME, elm);
+            const cb = me.view.getBrother(me.view.SHIFT_NAME, elm);
             cb && (cb.checked = true);
         }
     },
@@ -361,7 +359,7 @@ var KS4GT_OP = {
      * @param  {Function} callback will excute after message is removed
      */
     showMessage: function(msg, state, lifetime, callback) {
-        var me = this,
+        const me = this,
             box = me.view.getStatusBox();
 
         // cache original classname
@@ -393,7 +391,7 @@ var KS4GT_OP = {
      * @param  {String} str  character of shortcut key
      * @return {String}      corrected character
      */
-    correctShorcutKey: function(str) {
+    correctShortcutKey: function(str) {
         return this.toHalf(str.substr(0, 1)).toLowerCase();
     },
 
@@ -404,7 +402,7 @@ var KS4GT_OP = {
      * @return {DomElements Array}       array of invalid input elements (if exists)
      */
     validate: function(rows, name) {
-        var me = this,
+        const me = this,
             view = me.view,
             invalidElements = [];
 
@@ -415,14 +413,13 @@ var KS4GT_OP = {
         }
 
         rows.forEach(function(row) {
-            var elm, val;
+            const elm = view.getShortcutKeyElm(row),
+                val = view.getShortcutKey(row);
 
-            // shortcut key validate
-            elm = view.getShorcutKeyElm(row);
-            val = view.getShorcutKey(row);
+            // validate shortcut key
             if (!val.match(me.acceptableKeyRegExp)) {
-                // elm.setCustomValidity('shortcut key must be alphanumeric 1 char');
-                elm.setCustomValidity('invalid shortcut key. only [a-z0-9] is OK');
+                // elm.setCustomValidity('invalid shortcut key. only [a-z0-9] is OK');
+                elm.setCustomValidity('invalid shortcut key.');
                 invalidElements.push(elm);
             } else {
                 elm.setCustomValidity('');

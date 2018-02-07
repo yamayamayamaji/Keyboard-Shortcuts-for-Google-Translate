@@ -35,11 +35,14 @@ const KS4GT_CS = {
                 // load default settings from json file
                 defaultSettings: null,
                 // load user settings from extension sync storage
-                userSettings: null
+                userSettings: null,
+                // get runtime platform infomation
+                platformInfo: null
             },
             function(res) {
-                me.setupRecievers(res.defaultSettings);
-                me.userSettings = res.userSettings;
+                me.setupRecievers(res.defaultSettings || {});
+                me.userSettings = res.userSettings || {};
+                me.platformInfo = res.platformInfo || {};
 
                 me.isReady = true;
                 me.onReady();
@@ -235,12 +238,29 @@ const KS4GT_CS = {
      * @return {Object} reciver info (return undefined if not assigned any)
      */
     getAssignedReciever: function(evt) {
-        var me = this,
-            key = evt.key.toLowerCase(),
+        const me = this,
+            pivotKeyPressed = (me.platformInfo.os === chrome.runtime.PlatformOs.MAC) ?
+                                evt.altKey || evt.ctrlKey : evt.altKey
+
+        if (!pivotKeyPressed) { return; }
+
+        let key = evt.key.toLowerCase(),
             reciever;
 
-        // continue only if [alt] + (registered key) is pressed
-        if (!key.match(me.keysRegExp) || !evt.altKey) { return; }
+        // If there is no shortcut key matching the input character
+        // Look for a shortcut key that matches the physical key
+        // (on a QWERTY layout keyboard)
+        if (!key.match(me.keysRegExp)) {
+            const code = evt.code;
+            if (code.match(/^(Key|Digit|Numpad)/)) {
+                const physicalKey = code.slice(-1).toLowerCase();
+                if (physicalKey.match(me.keysRegExp)) {
+                    key = physicalKey;
+                } else {
+                    return;
+                }
+            }
+        }
 
         if (evt.shiftKey) {
             reciever = me.altShiftTarget[key];

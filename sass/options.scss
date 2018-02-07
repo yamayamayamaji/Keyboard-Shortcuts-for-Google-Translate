@@ -125,6 +125,15 @@ body {
 .with-shift-cb {
 }
 
+.note {
+    font-weight: bold;
+    color: #30b578;
+
+    &::before {
+        content: "*";
+    }
+}
+
 #donations {
     color: #888;
 }

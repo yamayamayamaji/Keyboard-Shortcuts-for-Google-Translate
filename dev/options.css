@@ -87,6 +87,12 @@ body {
   .key-inputer-txt:invalid {
     background-color: #f66; }
 
+.note {
+  font-weight: bold;
+  color: #30b578; }
+  .note::before {
+    content: "*"; }
+
 #donations {
   color: #888; }
 
