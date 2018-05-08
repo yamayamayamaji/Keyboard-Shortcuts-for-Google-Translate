@@ -48,21 +48,43 @@
 
 
 // language swap
-#gt-swap::after {
-    @include key-nav-v-num(-13px);
+#gt-swap {
+    &.navi {
+        &::after {
+            @include key-nav-v-num(-13px);
+        }
+    }
 }
 // language select
-#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit)::after {
-    @include key-nav-h();
-    counter-increment: langs;
+#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit) {
+    &.navi {
+        &::after {
+            @include key-nav-h();
+        }
+    }
+    // &.hover-navi {
+    //     &::after {
+    //         @include key-nav-h();
+    //         display: none;
+    //         // visibility: hidden;
+    //     }
+    //     &:hover::after {
+    //         display: unset;
+    //         // visibility: unset;
+    //     }
+    // }
 }
 
 // source language list
 // target language list
 #gt-sl-gms,
 #gt-tl-gms {
-    .goog-flat-menu-button-dropdown::after {
-        @include key-nav-for-langlist(-5px);
+    .goog-flat-menu-button-dropdown {
+        &.navi {
+            &::after {
+                @include key-nav-for-langlist(-5px);
+            }
+        }
     }
 }
 
@@ -75,8 +97,12 @@
     }
 }
 
-#gt-clear::after {
-    @include key-nav-v-char(-7px);
+#gt-clear {
+    &.navi {
+        &::after {
+            @include key-nav-v-char(-7px);
+        }
+    }
 }
 
 #gt-speech,
@@ -87,18 +113,25 @@
 #gt-res-listen,
 #gt-pb-star .goog-toolbar-button,
 #gt-res-roman {
-    &::after {
-        @include key-nav-v-char(-12px);
+    &.navi {
+        &::after {
+            @include key-nav-v-char(-12px);
+            @include key-nav-h();
+        }
     }
 }
 
 // source wrapper
-#gt-src-wrap::after {
-    @include key-nav-v(auto) {
-        font-size: smaller;
-        right: 3px;
-        bottom: 1px;
-        position: absolute;
-        content: attr(data-key-navi) " to focus";
+#gt-src-wrap {
+    &.navi {
+        &::after {
+            @include key-nav-v(auto) {
+                font-size: smaller;
+                right: 3px;
+                bottom: 1px;
+                position: absolute;
+                content: attr(data-key-navi) " to focus";
+            }
+        }
     }
 }

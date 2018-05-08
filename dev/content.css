@@ -6,7 +6,8 @@
  *
  * License: MIT
  */
-#gt-swap::after {
+/* line 53, ../sass/content.scss */
+#gt-swap.navi::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
@@ -16,16 +17,17 @@
   text-align: center;
   top: -13px; }
 
-#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit)::after {
+/* line 61, ../sass/content.scss */
+#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit).navi::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
   text-decoration: underline;
-  content: attr(data-key-navi);
-  counter-increment: langs; }
+  content: attr(data-key-navi); }
 
-#gt-sl-gms .goog-flat-menu-button-dropdown::after,
-#gt-tl-gms .goog-flat-menu-button-dropdown::after {
+/* line 84, ../sass/content.scss */
+#gt-sl-gms .goog-flat-menu-button-dropdown.navi::after,
+#gt-tl-gms .goog-flat-menu-button-dropdown.navi::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
@@ -36,6 +38,7 @@
   left: -7px;
   top: -5px; }
 
+/* line 92, ../sass/content.scss */
 #gt-lang-submit::after {
   color: #aaa;
   font-weight: normal;
@@ -46,10 +49,12 @@
   text-align: center;
   font-size: smaller;
   top: 9px; }
+/* line 95, ../sass/content.scss */
 #gt-lang-submit:hover::after {
   display: inline-block; }
 
-#gt-clear::after {
+/* line 102, ../sass/content.scss */
+#gt-clear.navi::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
@@ -60,14 +65,15 @@
   font-size: smaller;
   top: -7px; }
 
-#gt-speech::after,
-#gt-src-roman::after,
-#gt-src-listen::after,
-#gt-res-select::after,
-#gt-res-copy::after,
-#gt-res-listen::after,
-#gt-pb-star .goog-toolbar-button::after,
-#gt-res-roman::after {
+/* line 117, ../sass/content.scss */
+#gt-speech.navi::after,
+#gt-src-roman.navi::after,
+#gt-src-listen.navi::after,
+#gt-res-select.navi::after,
+#gt-res-copy.navi::after,
+#gt-res-listen.navi::after,
+#gt-pb-star .goog-toolbar-button.navi::after,
+#gt-res-roman.navi::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
@@ -76,9 +82,15 @@
   display: block;
   text-align: center;
   font-size: smaller;
-  top: -12px; }
+  top: -12px;
+  color: #aaa;
+  font-weight: normal;
+  position: relative;
+  text-decoration: underline;
+  content: attr(data-key-navi); }
 
-#gt-src-wrap::after {
+/* line 127, ../sass/content.scss */
+#gt-src-wrap.navi::after {
   color: #aaa;
   font-weight: normal;
   position: relative;
@@ -92,5 +104,3 @@
   position: absolute;
   content: attr(data-key-navi) " to focus";
   top: auto; }
-
-/*# sourceMappingURL=content.css.map */

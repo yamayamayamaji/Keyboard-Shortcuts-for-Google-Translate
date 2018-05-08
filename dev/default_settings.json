@@ -237,6 +237,7 @@
     "captionTarget": {
       "selector": "#gt-lang-submit"
     },
+    "naviDisp": "while hovering",
     "cmd": "click"
   }
 }

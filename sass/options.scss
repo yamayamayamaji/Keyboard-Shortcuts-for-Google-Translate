@@ -28,10 +28,12 @@ body {
 }
 
 .contents {
-    $width-and-count: 250px 2;
+    $width: 250px;
+    $count: 2;
+    $width-and-count: $width $count;
     -webkit-columns: $width-and-count;
     columns: $width-and-count;
-    min-width: 550px;
+    min-width: $width * $count + 50px;
 }
 
 .toolbar {
@@ -85,7 +87,7 @@ body {
 .row-wrap {
     margin: 0;
     padding: 3px;
-    height: 26px;
+    min-height: 26px;
     font-size: inherit;
 
     &:nth-of-type(even) {
@@ -105,15 +107,25 @@ body {
     @include cell();
     margin: 0 10px;
 }
+.navi-disp-wrap {
+    font-size: small;
+    margin: 0 5px;
+}
 
-.group-title {
+.group-head {
     margin: 0;
     padding: 5px;
     background-color: #eee;
-    font-size: medium;
-    font-weight: bold;
+
+    .group-title {
+        font-size: medium;
+        font-weight: bold;
+    }
 }
 
+.navi-disp-sb {
+    margin-left: 5px;
+}
 .key-inputer-txt {
     text-align: center;
     width: 26px;

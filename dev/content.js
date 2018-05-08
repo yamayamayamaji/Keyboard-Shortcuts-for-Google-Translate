@@ -23,6 +23,12 @@ const KS4GT_CS = {
     userSettings: {},
     recievers: {},
 
+    NAVI_TYPE: {
+        atAllTimes: 'at all times',
+        whileHovering: 'while hovering',
+        none: 'none'
+    },
+
     /**
      * ready before initialize
      */
@@ -117,7 +123,8 @@ const KS4GT_CS = {
             Object.assign(rcv, {
                 shortcutKey: setting.shortcutKey && setting.shortcutKey.toLowerCase(),
                 // alt: setting.alt,
-                shift: setting.shift
+                shift: setting.shift,
+                naviDisp: setting.naviDisp
             });
         });
     },
@@ -134,12 +141,38 @@ const KS4GT_CS = {
             // continue if shortcut key is not assigned
             if (!key) { return; }
 
-            if (rcv.shift === true) {
-                key = key.toUpperCase();
-            }
+            const elm = rcv.capElm || rcv.elm;
 
-            // set data-key-navi attribute
-            (rcv.capElm || rcv.elm).dataset.keyNavi = '(' + key + ')';
+            // set key navigation display
+            switch (rcv.naviDisp) {
+            case me.NAVI_TYPE.none:
+                return;
+
+            case me.NAVI_TYPE.whileHovering:
+                let keyCombs = [];
+
+                if (rcv.alt) { keyCombs.push('alt'); }
+                if (rcv.shift) { keyCombs.push('shift'); }
+                keyCombs.push(key);
+
+                if (!elm.dataset.tooltip) {
+                    elm.dataset.tooltip = '';
+                }
+                elm.dataset.tooltip += `(${keyCombs.join(' + ')})`;
+                break;
+
+            // me.NAVI_TYPE.atAllTimes or undefined
+            default:
+                if (rcv.shift === true) {
+                    key = key.toUpperCase();
+                }
+
+                // set data-key-navi attribute
+                elm.dataset.keyNavi = `(${key})`;
+
+                elm.classList.add('navi');
+                break;
+            }
         });
     },
 
@@ -188,7 +221,7 @@ const KS4GT_CS = {
             if (!key) { return; }
 
             // [alt] + [shift] + key
-            if (rcv.shift === true) {
+            if (rcv.alt === true && rcv.shift === true) {
                 me.altShiftTarget[key] = reciever;
                 return;
             }

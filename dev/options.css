@@ -50,7 +50,7 @@ body {
 .row-wrap {
   margin: 0;
   padding: 3px;
-  height: 26px;
+  min-height: 26px;
   font-size: inherit; }
   .row-wrap:nth-of-type(even) {
     background-color: #f6f6f6; }
@@ -74,12 +74,20 @@ body {
   width: auto;
   margin: 0 10px; }
 
-.group-title {
+.navi-disp-wrap {
+  font-size: small;
+  margin: 0 5px; }
+
+.group-head {
   margin: 0;
   padding: 5px;
-  background-color: #eee;
-  font-size: medium;
-  font-weight: bold; }
+  background-color: #eee; }
+  .group-head .group-title {
+    font-size: medium;
+    font-weight: bold; }
+
+.navi-disp-sb {
+  margin-left: 5px; }
 
 .key-inputer-txt {
   text-align: center;

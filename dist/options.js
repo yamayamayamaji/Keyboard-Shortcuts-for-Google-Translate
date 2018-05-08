@@ -31,10 +31,18 @@ const KS4GT_OP_view = {
     STATUS_BOX_ID:     'status',
     SAVE_BTN_ID:       'save-btn',
     RESET_BTN_ID:      'reset-btn',
+    GROUP_CLS:         'group',
     ROW_CLS:           'row',
     RCV_ID_NAME:       'name',
     SHORTCUT_KEY_NAME: 'shortcut-key',
     SHIFT_NAME:        'with-shift',
+    NAVI_DISP_NAME:    'navi-disp',
+
+    NAVI_TYPE: {
+        atAllTimes: 'at all times',
+        whileHovering: 'while hovering',
+        none: 'none'
+    },
 
     // default combination key used with shortcut key
     pivotKey: 'Alt',
@@ -79,12 +87,28 @@ const KS4GT_OP_view = {
 
             if (!groups[g]) { groups[g] = []; }
             Object.assign(settings, customSettings[name]);
-            groups[g].push(me.settingsHtml(name, settings));
+
+            const currentGroup = groups[g],
+                navi = settings.naviDisp;
+
+            currentGroup.push(me.keySettingsHtml(name, settings));
+
+            if (navi && !currentGroup.naviDisp) {
+                currentGroup.naviDisp = navi
+            };
         });
 
-        iterateObject(groups, function(group, html) {
-            const container = $(group);
-            container && container.insertAdjacentHTML('beforeend', html.join(''));
+        iterateObject(groups, function(groupName, groupValues) {
+            const container = $(`group-${groupName}`),
+                htmls = groupValues.slice(0, groupValues.length);
+
+            if (!container) { return; };
+
+            container.insertAdjacentHTML('beforeend', htmls.join(''));
+
+            // set intial value
+            const naviSelector = container.querySelector('[name=navi-disp]');
+            naviSelector.value = groupValues.naviDisp;
         });
     },
 
@@ -100,15 +124,9 @@ const KS4GT_OP_view = {
   <div id="${me.RESET_BTN_ID}" class="tb-item tb-item-right">reset settings</div>
 </div>
 <div class="contents">
-  <section id="lang" class="group-wrap">
-    <h1 class="group-title">lang area</h1>
-  </section>
-  <section id="source" class="group-wrap">
-    <h1 class="group-title">source area</h1>
-  </section>
-  <section id="result" class="group-wrap">
-    <h1 class="group-title">result area</h1>
-  </section>
+  ${me.groupHtml('lang')}
+  ${me.groupHtml('source')}
+  ${me.groupHtml('result')}
 </div>
 <div class="toolbar">
   <div id="${me.STATUS_BOX_ID}" class="tb-item tb-item-left"></div>
@@ -120,11 +138,38 @@ const KS4GT_OP_view = {
 
     /**
      * returns an HTML fragment of this template with the specified values applied
+     * @param  {String} group group name
+     * @return {String}       HTML fragment
+     */
+    groupHtml: function(group) {
+        const me = this,
+            html =
+`<section id="group-${group}" class="${me.GROUP_CLS} group-wrap">
+  <h1 class="group-head">
+    <span class="group-title">${group} area</span>
+  </h1>
+  <h2 class="${me.ROW_CLS} row-wrap">
+    <span class="navi-disp-wrap">
+      show key navigation:
+      <select name="${me.NAVI_DISP_NAME}" class="navi-disp-sb">
+        <option>${me.NAVI_TYPE.atAllTimes}
+        <option>${me.NAVI_TYPE.whileHovering}
+        <option>${me.NAVI_TYPE.none}
+      </select>
+    </span>
+  </h2>
+</section>`
+
+        return html;
+    },
+
+    /**
+     * returns an HTML fragment of this template with the specified values applied
      * @param  {String} name     name(as index) of reciever
      * @param  {Object} settings template values of reciever setting
      * @return {String}          HTML fragment
      */
-    settingsHtml: function(name, settings) {
+    keySettingsHtml: function(name, settings) {
         const me = this,
             html =
 `<h2 class="${me.ROW_CLS} row-wrap">
@@ -147,13 +192,21 @@ const KS4GT_OP_view = {
         return html;
     },
 
-    findRow: function(clue) {
+    findAncestor: function(cls, clue) {
         let elm = clue;
 
-        while (!elm.classList.contains(this.ROW_CLS)) {
+        while (!elm.classList.contains(cls)) {
             elm = elm.parentElement;
         }
         return elm;
+    },
+
+    findGroupContained: function(clue) {
+        return this.findAncestor(this.GROUP_CLS, clue);
+    },
+
+    findRowContained: function(clue) {
+        return this.findAncestor(this.ROW_CLS, clue);
     },
 
     getRowItem: function(name, row) {
@@ -161,7 +214,7 @@ const KS4GT_OP_view = {
     },
 
     getBrother: function(name, clue) {
-        return this.getRowItem(name, this.findRow(clue));
+        return this.getRowItem(name, this.findRowContained(clue));
     },
 
     getResetBtn: function() {
@@ -176,8 +229,10 @@ const KS4GT_OP_view = {
         return $('status');
     },
 
-    getAllRowElements: function() {
-        return $$('.' + this.ROW_CLS);
+    getRowElementsOfShortcutKeySetting: function() {
+        return Array.from($$('.' + this.ROW_CLS)).filter(row => {
+            return this.getShortcutKeyElm(row);
+        });
     },
 
     getAllShortcutKeyElements: function() {
@@ -196,6 +251,11 @@ const KS4GT_OP_view = {
         return this.getRowItem(this.SHIFT_NAME, row);
     },
 
+    getNaviDispElm: function(row) {
+        const group = this.findGroupContained(row);
+        return group.querySelector('[name=' + this.NAVI_DISP_NAME + ']');
+    },
+
     getRcvId: function(row) {
         return this.getRcvIdElm(row).value;
     },
@@ -206,6 +266,10 @@ const KS4GT_OP_view = {
 
     getWithShift: function(row) {
         return !!this.getShiftElm(row).checked;
+    },
+
+    getNaviDisp: function(row) {
+        return this.getNaviDispElm(row).value;
     }
 };
 
@@ -299,12 +363,14 @@ const KS4GT_OP = {
         }
 
         // read user input values
-        iterateObject(me.view.getAllRowElements(), function(idx, row) {
+        iterateObject(me.view.getRowElementsOfShortcutKeySetting(), function(idx, row) {
             const name = me.view.getRcvId(row),
-                sk = me.view.getShortcutKey(row),
+                shortcutKey = me.view.getShortcutKey(row),
+                naviDisp = me.view.getNaviDisp(row),
                 settings = {
-                    shortcutKey: sk,
-                    shift: me.view.getWithShift(row)
+                    shortcutKey: shortcutKey,
+                    shift: me.view.getWithShift(row),
+                    naviDisp: naviDisp
                 };
 
             us[name] = settings;
@@ -337,7 +403,7 @@ const KS4GT_OP = {
     onShortcutKeyChange: function(evt) {
         const me = this,
             elm = evt.target,
-            row = me.view.findRow(elm);
+            row = me.view.findRowContained(elm);
         let c;
 
         elm.value = c = me.correctShortcutKey(elm.value);
@@ -407,7 +473,7 @@ const KS4GT_OP = {
             invalidElements = [];
 
         if (!rows) {
-            rows = Array.prototype.slice.call(view.getAllRowElements());
+            rows = Array.prototype.slice.call(view.getRowElementsOfShortcutKeySetting());
         } else if (!Array.isArray(rows)) {
             rows = [rows];
         }
@@ -444,5 +510,4 @@ const KS4GT_OP = {
 
 // document.addEventListener('DOMContentLoaded', KS4GT_OP.init.bind(KS4GT_OP));
 KS4GT_OP.init();
-
 })();
