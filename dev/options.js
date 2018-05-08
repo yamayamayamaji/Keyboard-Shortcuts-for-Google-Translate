@@ -294,7 +294,7 @@ const KS4GT_OP = {
 
         if (me.isReady) { return; }
 
-        chrome.extension.sendMessage({
+        chrome.runtime.sendMessage({
                 // load default settings from json file
                 defaultSettings: null,
                 // load user settings from extension sync storage

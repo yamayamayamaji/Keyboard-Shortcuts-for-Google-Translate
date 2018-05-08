@@ -24,9 +24,9 @@ const KS4GT_CS = {
     recievers: {},
 
     NAVI_TYPE: {
-        atAllTimes: 'at all times',
+        atAllTimes:    'at all times',
         whileHovering: 'while hovering',
-        none: 'none'
+        none:          'none'
     },
 
     /**
@@ -37,7 +37,7 @@ const KS4GT_CS = {
 
         if (me.isReady) { return; }
 
-        chrome.extension.sendMessage({
+        chrome.runtime.sendMessage({
                 // load default settings from json file
                 defaultSettings: null,
                 // load user settings from extension sync storage

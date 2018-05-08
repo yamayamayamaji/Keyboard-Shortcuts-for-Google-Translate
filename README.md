@@ -49,7 +49,9 @@ or right click extension's icon at address bar.
 donations are greatly appreciated.  
 
 <!--- pledgie (paypal) donation -->
+<!--
 <a href='https://pledgie.com/campaigns/30417'><img alt='Click here to lend your support to: Keyboard Shortcuts for Google Translate and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30417.png?skin_name=chrome' border='0' ></a>  
+ -->
 <!--- blockchain donation -->
 <a href="http://yamayamayamaji.github.io/Keyboard-Shortcuts-for-Google-Translate">Bitcoin donation</a>
 (bottom of the linked page)
@@ -76,3 +78,6 @@ donations are greatly appreciated.
 </div>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://blockchain.info/Resources/js/pay-now-button.js"></script> -->
+- BTC: 1C3U2Qnaq9Y9BaYvjVGTpBqSBCaJa1j8KQ
+- ETH: 0x97bdF0aE580649980494256F2Bec204Db2a6029b
+- XEM: NCCCWD-QRSGBW-VAUYQM-SXYAPX-KPXV6H-24LR4O-MQ6N

@@ -13,7 +13,7 @@
  */
 chrome.runtime.onInstalled.addListener(function() {
     var dc = chrome.declarativeContent;
-    dc.onPageChanged.removeRules(undefined, function() {
+    dc && dc.onPageChanged.removeRules(undefined, function() {
         dc.onPageChanged.addRules([{
             conditions: [
                 new dc.PageStateMatcher({
@@ -34,7 +34,7 @@ KS4GT_BP = {
         var me = this;
 
         //register message listener
-        chrome.extension.onMessage.addListener(me.onMessage.bind(me));
+        chrome.runtime.onMessage.addListener(me.onMessage.bind(me));
 
         return me;
     },
@@ -58,7 +58,7 @@ KS4GT_BP = {
     /**
      * message communication with content script
      * @param  {Mixed} message request message
-     * @param  {chrome.extension.MessageSender} sender message sender info
+     * @param  {chrome.runtime.MessageSender} sender message sender info
      * @param  {Function} sendResponse function using by response
      */
     onMessage: function(message, sender, sendResponse) {
@@ -127,6 +127,7 @@ KS4GT_BP = {
 
         return new Promise(function(resolve, reject) {
             chrome.storage.sync.get(search, function(items) {
+                items = items || {};
                 if (typeof(search) === 'string') {
                     items = items[search];
                 }
