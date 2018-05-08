@@ -134,6 +134,8 @@ const KS4GT_CS = {
      */
     setKeyCaption: function() {
         const me = this;
+            altCaption = (me.platformInfo.os === chrome.runtime.PlatformOs.MAC) ?
+                        'option' : 'alt';
 
         me.iterateObject(me.recievers, function(name, rcv) {
             let key = rcv.shortcutKey;
@@ -151,7 +153,7 @@ const KS4GT_CS = {
             case me.NAVI_TYPE.whileHovering:
                 let keyCombs = [];
 
-                if (rcv.alt) { keyCombs.push('alt'); }
+                if (rcv.alt) { keyCombs.push(altCaption); }
                 if (rcv.shift) { keyCombs.push('shift'); }
                 keyCombs.push(key);
 
