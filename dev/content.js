@@ -199,7 +199,7 @@ const KS4GT_CS = {
         const events = ['mousedown', 'mouseup', 'mouseout', 'mouseover', 'click'];
 
         for (let i = 0, e; e = events[i++];) {
-            this.mouseEvent[e] =  document.createEvent('MouseEvents');
+            this.mouseEvent[e] = document.createEvent('MouseEvents');
             this.mouseEvent[e].initEvent(e, true, false);
         }
     },

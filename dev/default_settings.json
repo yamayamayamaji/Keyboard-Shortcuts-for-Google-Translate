@@ -35,7 +35,7 @@
     "alias": "lang swap",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-swap"
+      "selector": "#gt-swap, .swap"
     }
   },
   "lang1": {
@@ -43,7 +43,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit)",
+      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
       "idx": 0
     }
   },
@@ -52,7 +52,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit)",
+      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
       "idx": 1
     }
   },
@@ -61,7 +61,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit)",
+      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
       "idx": 2
     }
   },
@@ -70,7 +70,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit)",
+      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
       "idx": 3
     }
   },
@@ -79,7 +79,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit)",
+      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
       "idx": 4
     }
   },
@@ -88,7 +88,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit)",
+      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
       "idx": 5
     }
   },
@@ -97,7 +97,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit)",
+      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
       "idx": 6
     }
   },
@@ -107,11 +107,12 @@
     "alias": "source lang menu",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-sl-gms"
+      "selector": "#gt-sl-gms, .sl-more"
     },
     "captionTarget": {
-      "selector": "#gt-sl-gms .goog-flat-menu-button-dropdown"
-    }
+      "selector": "#gt-sl-gms .goog-flat-menu-button-dropdown, .sl-more"
+    },
+    "cmd": "click"
   },
   "tlGms": {
     "shortcutKey": "9",
@@ -119,11 +120,12 @@
     "alias": "target lang menu",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-tl-gms"
+      "selector": "#gt-tl-gms, .tl-more"
     },
     "captionTarget": {
-      "selector": "#gt-tl-gms .goog-flat-menu-button-dropdown"
-    }
+      "selector": "#gt-tl-gms .goog-flat-menu-button-dropdown, .tl-more"
+    },
+    "cmd": "click"
   },
 
   /**
@@ -134,7 +136,7 @@
     "group": "source",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-clear"
+      "selector": "#gt-clear, .tlid-clear-source-text"
     }
   },
   "speech": {
@@ -161,7 +163,7 @@
     "alt": true,
     "shift": true, 
     "clickTarget": {
-      "selector": "#gt-src-listen"
+      "selector": "#gt-src-listen, .src-tts"
     }
   },
 
@@ -183,7 +185,7 @@
     "alias": "copy",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-res-copy"
+      "selector": "#gt-res-copy, .tlid-copy-translation-button"
     }
   },
   "resRoman": {
@@ -201,7 +203,7 @@
     "alias": "listen",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-res-listen"
+      "selector": "#gt-res-listen, .res-tts"
     }
   },
   "pbStar": {
@@ -210,7 +212,7 @@
     "alias": "save to phrase book",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-pb-star .goog-toolbar-button"
+      "selector": "#gt-pb-star .goog-toolbar-button, .starbutton"
     }
   },
 
