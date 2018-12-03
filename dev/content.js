@@ -133,7 +133,7 @@ const KS4GT_CS = {
      * display shortcut key character to each target
      */
     setKeyCaption: function() {
-        const me = this;
+        const me = this,
             altCaption = (me.platformInfo.os === chrome.runtime.PlatformOs.MAC) ?
                         'option' : 'alt';
 
