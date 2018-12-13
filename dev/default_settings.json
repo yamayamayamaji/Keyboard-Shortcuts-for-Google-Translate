@@ -35,7 +35,7 @@
     "alias": "lang swap",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-swap, .swap"
+      "selector": ".swap"
     }
   },
   "lang1": {
@@ -43,7 +43,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
+      "selector": ".ls-wrap .jfk-button:not(.swap)",
       "idx": 0
     }
   },
@@ -52,7 +52,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
+      "selector": ".ls-wrap .jfk-button:not(.swap)",
       "idx": 1
     }
   },
@@ -61,7 +61,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
+      "selector": ".ls-wrap .jfk-button:not(.swap)",
       "idx": 2
     }
   },
@@ -70,7 +70,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
+      "selector": ".ls-wrap .jfk-button:not(.swap)",
       "idx": 3
     }
   },
@@ -79,7 +79,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
+      "selector": ".ls-wrap .jfk-button:not(.swap)",
       "idx": 4
     }
   },
@@ -88,7 +88,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
+      "selector": ".ls-wrap .jfk-button:not(.swap)",
       "idx": 5
     }
   },
@@ -97,7 +97,7 @@
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-langs .jfk-button:not([aria-hidden=\"true\"]):not(#gt-swap):not(#gt-submit), .ls-wrap .jfk-button:not(.swap)",
+      "selector": ".ls-wrap .jfk-button:not(.swap)",
       "idx": 6
     }
   },
@@ -107,10 +107,7 @@
     "alias": "source lang menu",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-sl-gms, .sl-more"
-    },
-    "captionTarget": {
-      "selector": "#gt-sl-gms .goog-flat-menu-button-dropdown, .sl-more"
+      "selector": ".sl-more"
     },
     "cmd": "click"
   },
@@ -120,10 +117,7 @@
     "alias": "target lang menu",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-tl-gms, .tl-more"
-    },
-    "captionTarget": {
-      "selector": "#gt-tl-gms .goog-flat-menu-button-dropdown, .tl-more"
+      "selector": ".tl-more"
     },
     "cmd": "click"
   },
@@ -136,7 +130,7 @@
     "group": "source",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-clear, .tlid-clear-source-text"
+      "selector": ".tlid-clear-source-text"
     }
   },
   "speech": {
@@ -163,7 +157,7 @@
     "alt": true,
     "shift": true, 
     "clickTarget": {
-      "selector": "#gt-src-listen, .src-tts"
+      "selector": ".src-tts"
     }
   },
 
@@ -185,7 +179,7 @@
     "alias": "copy",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-res-copy, .tlid-copy-translation-button"
+      "selector": ".tlid-copy-translation-button"
     }
   },
   "resRoman": {
@@ -203,7 +197,7 @@
     "alias": "listen",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-res-listen, .res-tts"
+      "selector": ".res-tts"
     }
   },
   "pbStar": {
@@ -212,7 +206,7 @@
     "alias": "save to phrase book",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-pb-star .goog-toolbar-button, .starbutton"
+      "selector": ".starbutton"
     }
   },
 
@@ -225,7 +219,7 @@
       "selector": "#source"
     },
     "captionTarget": {
-      "selector": "#gt-src-wrap"
+      "selector": ".source-wrap"
     },
     "cmd": "focus"
   },
@@ -234,10 +228,7 @@
   "translate": {
     "shortcutKey": "shift + enter",
     "clickTarget": {
-      "selector": "#gt-submit"
-    },
-    "captionTarget": {
-      "selector": "#gt-lang-submit"
+      "selector": ".go-button"
     },
     "naviDisp": "while hovering",
     "cmd": "click"

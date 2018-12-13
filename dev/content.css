@@ -6,145 +6,119 @@
  *
  * License: MIT
  */
-#gt-swap.navi::after {
-  color: #aaa;
-  font-weight: normal;
-  font-size: small;
-  position: relative;
-  text-decoration: underline;
-  content: attr(data-key-navi);
-  display: block;
-  text-align: center;
-  top: -13px; }
+.swap.navi {
+  position: relative; }
+  .swap.navi::after {
+    color: #aaa;
+    font-weight: normal;
+    font-size: x-small;
+    position: relative;
+    text-decoration: underline;
+    content: attr(data-key-navi);
+    left: 0;
+    line-height: 75px;
+    position: absolute;
+    width: 100%; }
 
-.swap::after {
-  color: #aaa;
-  font-weight: normal;
-  font-size: small;
-  position: relative;
-  text-decoration: underline;
-  content: attr(data-key-navi); }
-
-#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit).navi::after,
 .ls-wrap .jfk-button:not(.swap).navi::after {
   color: #aaa;
   font-weight: normal;
-  font-size: small;
-  position: relative;
-  text-decoration: underline;
-  content: attr(data-key-navi); }
-
-#gt-sl-gms .goog-flat-menu-button-dropdown.navi::after,
-#gt-tl-gms .goog-flat-menu-button-dropdown.navi::after {
-  color: #aaa;
-  font-weight: normal;
-  font-size: small;
+  font-size: x-small;
   position: relative;
   text-decoration: underline;
   content: attr(data-key-navi);
-  display: block;
-  text-align: center;
-  left: 18px;
-  top: 16px; }
+  left: 0;
+  line-height: 75px;
+  position: absolute;
+  width: 100%; }
 
-.sl-more.navi::after,
-.tl-more.navi::after {
+.sl-more.navi,
+.tl-more.navi {
+  position: relative; }
+  .sl-more.navi::after,
+  .tl-more.navi::after {
+    color: #aaa;
+    font-weight: normal;
+    font-size: x-small;
+    position: relative;
+    text-decoration: underline;
+    content: attr(data-key-navi);
+    left: 34px;
+    line-height: 48px;
+    position: absolute; }
+
+.go-button::after {
   color: #aaa;
   font-weight: normal;
-  font-size: small;
-  position: relative;
-  text-decoration: underline;
-  content: attr(data-key-navi);
-  display: block;
-  text-align: center;
-  left: 18px;
-  top: 16px; }
-
-#gt-lang-submit::after {
-  color: #aaa;
-  font-weight: normal;
-  font-size: small;
+  font-size: x-small;
   position: relative;
   text-decoration: underline;
   content: attr(data-key-navi);
   display: none;
   text-align: center;
-  font-size: smaller;
+  font-size: x-small;
   top: 9px; }
-#gt-lang-submit:hover::after {
+.go-button:hover::after {
   display: inline-block; }
 
-#gt-clear.navi::after {
+.tlid-clear-source-text.navi::after {
   color: #aaa;
   font-weight: normal;
-  font-size: small;
+  font-size: x-small;
   position: relative;
   text-decoration: underline;
   content: attr(data-key-navi);
   display: block;
   text-align: center;
-  font-size: smaller;
-  top: -7px; }
-
-.tlid-clear-source-text::after {
-  color: #aaa;
-  font-weight: normal;
-  font-size: small;
-  position: relative;
-  text-decoration: underline;
-  content: attr(data-key-navi);
-  display: block;
-  text-align: center;
-  font-size: smaller;
+  font-size: x-small;
   top: -7px; }
 
 #gt-speech.navi::after,
 #gt-src-roman.navi::after,
-#gt-src-listen.navi::after,
 #gt-res-select.navi::after,
-#gt-res-copy.navi::after, .tlid-copy-translation-button.navi::after,
-#gt-res-listen .res-tts.navi::after,
-#gt-pb-star .goog-toolbar-button.navi::after, .starbutton.navi::after,
 #gt-res-roman.navi::after {
   color: #aaa;
   font-weight: normal;
-  font-size: small;
+  font-size: x-small;
   position: relative;
   text-decoration: underline;
   content: attr(data-key-navi);
   display: block;
   text-align: center;
-  font-size: smaller;
+  font-size: x-small;
   top: -17px;
   color: #aaa;
   font-weight: normal;
-  font-size: small;
+  font-size: x-small;
   position: relative;
   text-decoration: underline;
   content: attr(data-key-navi); }
 
-.src-tts.navi::after {
+.src-tts.navi::after,
+.res-tts.navi::after,
+.tlid-copy-translation-button.navi::after,
+.starbutton.navi::after {
   color: #aaa;
   font-weight: normal;
-  font-size: small;
+  font-size: x-small;
   position: relative;
   text-decoration: underline;
   content: attr(data-key-navi);
   display: block;
   text-align: center;
-  font-size: smaller;
+  font-size: x-small;
   top: -6px; }
 
-#gt-src-wrap.navi::after {
+.source-wrap.navi::after {
   color: #aaa;
   font-weight: normal;
-  font-size: small;
+  font-size: x-small;
   position: relative;
   text-decoration: underline;
   content: attr(data-key-navi);
   display: block;
   text-align: center;
-  font-size: smaller;
+  font-size: x-small;
   right: 3px;
   bottom: 1px;
   position: absolute;

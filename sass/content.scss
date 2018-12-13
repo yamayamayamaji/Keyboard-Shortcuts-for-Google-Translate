@@ -12,8 +12,10 @@
 @mixin key-nav() {
     color: #aaa;
     font-weight: normal;
-    font-size: small;
+    font-size: x-small;
+    // left: -0.4em;
     position: relative;
+    // text-align: end;
     text-decoration: underline;
     content: attr(data-key-navi);
     @content;
@@ -33,39 +35,46 @@
 
 @mixin key-nav-v-char($top: 0, $display: block) {
     @include key-nav-v($top, $display) {
-        font-size: smaller;
+        font-size: x-small;
     }
 }
 @mixin key-nav-v-num($top: 0) {
-    @include key-nav-v($top) {
+    @include key-nav() {
         @content;
     }
+    left: 0;
+    line-height: 75px;
+    position: absolute;
+    width: 100%;
 }
 @mixin key-nav-for-langlist() {
-    @include key-nav-v(16px) {
-        left: 18px;
+    // @include key-nav-v(16px) {
+    //     left: 18px;
+    // }
+    @include key-nav() {
+        @content;
     }
+    left: 34px;
+    line-height: 48px;
+    position: absolute;
 }
 
 
 // language swap
-#gt-swap {
+.swap {
     &.navi {
+        position: relative;
         &::after {
-            @include key-nav-v-num(-13px);
+            @include key-nav-v-num();
         }
     }
 }
-.swap::after {
-    @include key-nav-h();
-}
 
 // language select
-#gt-langs .jfk-button:not([aria-hidden="true"]):not(#gt-swap):not(#gt-submit),
 .ls-wrap .jfk-button:not(.swap) {
     &.navi {
         &::after {
-            @include key-nav-h();
+            @include key-nav-v-num();
             // counter-increment: langs;
         }
     }
@@ -73,26 +82,17 @@
 
 // source language list
 // target language list
-#gt-sl-gms,
-#gt-tl-gms {
-    .goog-flat-menu-button-dropdown {
-        &.navi {
-            &::after {
-                @include key-nav-for-langlist();
-            }
-        }
-    }
-}
 .sl-more,
 .tl-more {
     &.navi {
+        position: relative;
         &::after {
             @include key-nav-for-langlist();
         }
     }
 }
 
-#gt-lang-submit {
+.go-button {
     &::after {
         @include key-nav-v-char(9px, none);
     }
@@ -101,24 +101,17 @@
     }
 }
 
-#gt-clear {
+.tlid-clear-source-text {
     &.navi {
         &::after {
             @include key-nav-v-char(-7px);
         }
     }
 }
-.tlid-clear-source-text::after {
-    @include key-nav-v-char(-7px);
-}
 
 #gt-speech,
 #gt-src-roman,
-#gt-src-listen,
 #gt-res-select,
-#gt-res-copy, .tlid-copy-translation-button,
-#gt-res-listen .res-tts,
-#gt-pb-star .goog-toolbar-button, .starbutton,
 #gt-res-roman {
     &.navi {
         &::after {
@@ -127,7 +120,10 @@
         }
     }
 }
-.src-tts {
+.src-tts,
+.res-tts,
+.tlid-copy-translation-button,
+.starbutton {
     &.navi {
         &::after {
             @include key-nav-v-char(-6px);
@@ -136,11 +132,11 @@
 }
 
 // source wrapper
-#gt-src-wrap {
+.source-wrap {
     &.navi {
         &::after {
             @include key-nav-v(auto) {
-                font-size: smaller;
+                font-size: x-small;
                 right: 3px;
                 bottom: 1px;
                 position: absolute;
