@@ -46,7 +46,8 @@ const KS4GT_CS = {
                 platformInfo: null
             },
             function(res) {
-                me.setupRecievers(res.defaultSettings || {});
+                // me.setupRecievers(res.defaultSettings || {});
+                me.defaultSettings = res.defaultSettings || {};
                 me.userSettings = res.userSettings || {};
                 me.platformInfo = res.platformInfo || {};
 
@@ -64,19 +65,35 @@ const KS4GT_CS = {
 
         if (!me.isReady) {
             me.onReady = me.init.bind(me);
+            me.injectStyleSheet(chrome.extension.getURL('content.css'));
+            me.observeResultUpdated();
             me.ready();
             return;
         }
 
         me.setupMouseEventEmulator();
 
+        me.setupRecievers(me.defaultSettings);
         me.applyUserSettings();
 
         me.initKeyMaps();
         me.listenKeyEvent();
 
-        me.injectStyleSheet(chrome.extension.getURL('content.css'));
         me.setKeyCaption();
+    },
+
+    /**
+     * observe result area dom updated.
+     * if updated, resetting recievers and key captions.
+     */
+    observeResultUpdated() {
+        const me = this,
+            resultContainer = document.querySelectorAll(".tlid-results-container")[0],
+            observer = new MutationObserver((MutationRecords, MutationObserver) => {
+                me.init();
+            });
+
+        observer.observe(resultContainer, {childList: true});
     },
 
     /**

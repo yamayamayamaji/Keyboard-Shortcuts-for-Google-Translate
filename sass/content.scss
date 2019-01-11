@@ -13,9 +13,7 @@
     color: #aaa;
     font-weight: normal;
     font-size: x-small;
-    // left: -0.4em;
     position: relative;
-    // text-align: end;
     text-decoration: underline;
     content: attr(data-key-navi);
     @content;
@@ -48,9 +46,6 @@
     width: 100%;
 }
 @mixin key-nav-for-langlist() {
-    // @include key-nav-v(16px) {
-    //     left: 18px;
-    // }
     @include key-nav() {
         @content;
     }
