@@ -46,7 +46,6 @@ const KS4GT_CS = {
                 platformInfo: null
             },
             function(res) {
-                // me.setupRecievers(res.defaultSettings || {});
                 me.defaultSettings = res.defaultSettings || {};
                 me.userSettings = res.userSettings || {};
                 me.platformInfo = res.platformInfo || {};
@@ -115,9 +114,6 @@ const KS4GT_CS = {
             if (cap) {
                 settings.capElm = $(cap.selector)[cap.idx || 0];
             }
-
-            // remove if the target element no longer exists
-            if (!settings.elm) { delete settingsJson[name]; }
         });
 
         me.recievers = settingsJson;
@@ -161,6 +157,9 @@ const KS4GT_CS = {
             if (!key) { return; }
 
             const elm = rcv.capElm || rcv.elm;
+
+            // continue if reciever element is not exists
+            if (!elm) { return; }
 
             // set key navigation display
             switch (rcv.naviDisp) {
