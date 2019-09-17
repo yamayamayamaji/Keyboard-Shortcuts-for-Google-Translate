@@ -97,6 +97,7 @@
 .src-tts.navi::after,
 .res-tts.navi::after,
 .tlid-copy-translation-button.navi::after,
+.tlid-suggest-edit-button.navi::after,
 .starbutton.navi::after {
   color: #aaa;
   font-weight: normal;

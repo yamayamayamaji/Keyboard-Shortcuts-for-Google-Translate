@@ -182,6 +182,15 @@
       "selector": ".tlid-copy-translation-button"
     }
   },
+  "resEdit": {
+    "shortcutKey": "",
+    "group": "result",
+    "alias": "suggest edit",
+    "alt": true,
+    "clickTarget": {
+      "selector": ".tlid-suggest-edit-button"
+    }
+  },
   "resRoman": {
     "shortcutKey": "", 
     "group": "result",
