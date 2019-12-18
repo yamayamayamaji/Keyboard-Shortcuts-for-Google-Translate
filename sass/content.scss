@@ -47,9 +47,9 @@
 }
 @mixin key-nav-for-langlist() {
     @include key-nav() {
+        left: 34px;
         @content;
     }
-    left: 34px;
     line-height: 48px;
     position: absolute;
 }
@@ -77,12 +77,27 @@
 
 // source language list
 // target language list
-.sl-more,
+.sl-more {
+    &.navi {
+        position: relative;
+        &::after {
+            @include key-nav-for-langlist();
+            body.with-sl-list & {
+                transform: inherit;
+                left: unset;
+            }
+        }
+    }
+}
 .tl-more {
     &.navi {
         position: relative;
         &::after {
             @include key-nav-for-langlist();
+            body.with-tl-list & {
+                transform: inherit;
+                left: unset;
+            }
         }
     }
 }
@@ -115,6 +130,31 @@
         }
     }
 }
+
+.ita-kd-inputtool-icon {
+    &.navi {
+        &::after {
+            @include key-nav-v-char(-1px);
+        }
+    }
+}
+.ita-kd-dropdown {
+    &.navi {
+        &::after {
+            @include key-nav-v(-4px);
+            left: 1px;
+        }
+    }
+}
+.vk-t-btn {
+    &.navi {
+        &::after {
+            @include key-nav-v(-14px);
+            left: -2px;
+        }
+    }
+}
+
 .src-tts,
 .res-tts,
 .tlid-copy-translation-button,

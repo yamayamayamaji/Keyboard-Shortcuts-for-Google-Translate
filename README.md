@@ -28,9 +28,12 @@ default settings are
 * source delete -> Alt + d  
 * source microphone -> Alt + m  
 * source listen -> Alt + Shift + l  
+* show virtual keyboard -> (no default but customizable)  
+* show input tools -> (no default but customizable)  
 * result select all -> Alt + a  
 * result copy -> Alt + c  
 * result listen -> Alt + l  
+* suggest edit -> (no default but customizable)  
 * save to phrasebook -> Alt + p  
 * focus to source input -> Alt + f  
 * translate -> Shift + Enter  

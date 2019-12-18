@@ -160,6 +160,34 @@
       "selector": ".src-tts"
     }
   },
+  "srcVirtualKeyboard": {
+    "shortcutKey": "",
+    "group": "source",
+    "alias": "virtual keyboard",
+    "alt": true,
+    "clickTarget": {
+      "selector": ".ita-kd-inputtool-icon"
+    },
+    "cmd": "click"
+  },
+  "srcInputTools": {
+    "shortcutKey": "",
+    "group": "source",
+    "alias": "input tools",
+    "alt": true,
+    "clickTarget": {
+      "selector": ".ita-kd-dropdown"
+    },
+    "cmd": "click"
+  },
+  // uncustomizable
+  "srcHideVirtualKeyboard": {
+    "shortcutKey": "ESC",
+    "clickTarget": {
+      "selector": ".vk-t-btn"
+    },
+    "cmd": "click"
+  },
 
   /**
    * result area
@@ -216,6 +244,13 @@
     "alt": true,
     "clickTarget": {
       "selector": ".starbutton"
+    }
+  },
+  // uncustomizable
+  "resCancelFeedback": {
+    "shortcutKey": "ESC",
+    "clickTarget": {
+      "selector": "#st-buttons .jfk-button-standard"
     }
   },
 

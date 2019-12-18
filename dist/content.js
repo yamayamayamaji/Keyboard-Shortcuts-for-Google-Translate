@@ -200,7 +200,7 @@ const KS4GT_CS = {
      */
     injectStyleSheet: function(url) {
         const link = document.createElement('link'),
-            lastLink = document.querySelectorAll('link:last-of-type')[0];
+            lastLink = document.querySelector('link:last-of-type');
 
         link.rel = 'stylesheet';
         link.type = 'text/css';
@@ -272,6 +272,16 @@ const KS4GT_CS = {
                     translateRcv.elm.focus();
                 }, 0);
                 rcv = { elm: translateRcv.elm, cmd: translateRcv.cmd };
+            } else if (evt.key == 'Escape') {
+                for (const cand of Object.values(me.recievers)) {
+                    if (cand.shortcutKey !== 'ESC') { continue; }
+                    const elm = document.querySelector(cand.clickTarget.selector);
+                    // check element is visible 
+                    if (elm && elm.offsetParent) {
+                        rcv = { elm: elm, cmd: cand.cmd };
+                        break;
+                    }
+                }
             } else {
                 rcv = me.getAssignedReciever(evt);
             }
