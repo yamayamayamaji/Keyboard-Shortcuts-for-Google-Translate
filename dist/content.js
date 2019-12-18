@@ -82,17 +82,19 @@ const KS4GT_CS = {
     },
 
     /**
-     * observe result area dom updated.
+     * observe dom updated in source footer area and result area.
      * if updated, resetting recievers and key captions.
      */
     observeResultUpdated() {
         const me = this,
-            resultContainer = document.querySelectorAll(".tlid-results-container")[0],
+            sourceFooter = document.querySelector(".source-or-target-footer"),
+            resultContainer = document.querySelector(".tlid-results-container"),
             observer = new MutationObserver((MutationRecords, MutationObserver) => {
                 me.init();
             });
 
         observer.observe(resultContainer, {childList: true});
+        observer.observe(sourceFooter, {childList: true, subtree: true});
     },
 
     /**
