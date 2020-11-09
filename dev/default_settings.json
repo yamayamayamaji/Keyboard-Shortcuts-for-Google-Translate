@@ -22,7 +22,8 @@
  *   "captionTarget": {
  *     "selector":    selector for caption target button
  *     "idx":         specify the index of the element in query result matched selector
- *   }
+ *   },
+ *   "naviDisp":      when to display shortcut key captions (see KS4GT_CS.NAVI_TYPE)
  * }
  */
 {
@@ -35,69 +36,69 @@
     "alias": "lang swap",
     "alt": true,
     "clickTarget": {
-      "selector": ".swap"
+      "selector": ".U2dVxe > i"
     }
   },
-  "lang1": {
+  "langDetect": {
     "shortcutKey": "1",
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": ".ls-wrap .jfk-button:not(.swap)",
+      "selector": ".VfPpkd-AznF2e",
       "idx": 0
     }
   },
-  "lang2": {
+  "lang1": {
     "shortcutKey": "2",
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": ".ls-wrap .jfk-button:not(.swap)",
+      "selector": ".VfPpkd-AznF2e",
       "idx": 1
     }
   },
-  "lang3": {
+  "lang2": {
     "shortcutKey": "3",
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": ".ls-wrap .jfk-button:not(.swap)",
+      "selector": ".VfPpkd-AznF2e",
       "idx": 2
     }
   },
-  "lang4": {
+  "lang3": {
     "shortcutKey": "4",
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": ".ls-wrap .jfk-button:not(.swap)",
+      "selector": ".VfPpkd-AznF2e",
       "idx": 3
     }
   },
-  "lang5": {
+  "lang4": {
     "shortcutKey": "5",
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": ".ls-wrap .jfk-button:not(.swap)",
+      "selector": ".VfPpkd-AznF2e",
       "idx": 4
     }
   },
-  "lang6": {
+  "lang5": {
     "shortcutKey": "6",
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": ".ls-wrap .jfk-button:not(.swap)",
+      "selector": ".VfPpkd-AznF2e",
       "idx": 5
     }
   },
-  "lang7": {
+  "lang6": {
     "shortcutKey": "7",
     "group": "lang",
     "alt": true,
     "clickTarget": {
-      "selector": ".ls-wrap .jfk-button:not(.swap)",
+      "selector": ".VfPpkd-AznF2e",
       "idx": 6
     }
   },
@@ -107,9 +108,12 @@
     "alias": "source lang menu",
     "alt": true,
     "clickTarget": {
-      "selector": ".sl-more"
+      "selector": ".szLmtb",
+      "idx": 0
     },
-    "cmd": "click"
+    "captionTarget": {
+      "selector": ".szLmtb > .zQ0atf"
+    }
   },
   "tlGms": {
     "shortcutKey": "9",
@@ -117,9 +121,9 @@
     "alias": "target lang menu",
     "alt": true,
     "clickTarget": {
-      "selector": ".tl-more"
-    },
-    "cmd": "click"
+      "selector": ".szLmtb > .zQ0atf",
+      "idx": 1
+    }
   },
 
   /**
@@ -130,7 +134,7 @@
     "group": "source",
     "alt": true,
     "clickTarget": {
-      "selector": ".tlid-clear-source-text"
+      "selector": ".GA2I6e > i"
     }
   },
   "speech": {
@@ -138,16 +142,7 @@
     "group": "source",
     "alt": true,
     "clickTarget": {
-      "selector": "#gt-speech"
-    }
-  },
-  "srcRoman": {
-    "shortcutKey": "", 
-    "group": "source",
-    "alias": "roman",
-    "alt": true,
-    "clickTarget": {
-      "selector": "#gt-src-roman"
+      "selector": ".MtoyUd > span"
     }
   },
   "srcListen": {
@@ -157,7 +152,8 @@
     "alt": true,
     "shift": true, 
     "clickTarget": {
-      "selector": ".src-tts"
+      "selector": ".m0Qfkd > .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd)",
+      "idx": 0
     }
   },
   "srcVirtualKeyboard": {
@@ -166,9 +162,8 @@
     "alias": "virtual keyboard",
     "alt": true,
     "clickTarget": {
-      "selector": ".ita-kd-inputtool-icon"
-    },
-    "cmd": "click"
+      "selector": ".ita-kd-inputtool-icon.ita-kd-left"
+    }
   },
   "srcInputTools": {
     "shortcutKey": "",
@@ -177,55 +172,35 @@
     "alt": true,
     "clickTarget": {
       "selector": ".ita-kd-dropdown"
-    },
-    "cmd": "click"
+    }
   },
   // uncustomizable
   "srcHideVirtualKeyboard": {
     "shortcutKey": "ESC",
     "clickTarget": {
-      "selector": ".vk-t-btn"
-    },
-    "cmd": "click"
+      "selector": ".ita-hwt-close"
+    }
   },
 
   /**
    * result area
    */
-  "resSelect": {
-    "shortcutKey": "a",
-    "group": "result",
-    "alias": "select",
-    "alt": true,
-    "clickTarget": {
-      "selector": "#gt-res-select"
-    }
-  },
   "resCopy": {
     "shortcutKey": "c",
     "group": "result",
     "alias": "copy",
     "alt": true,
     "clickTarget": {
-      "selector": ".tlid-copy-translation-button"
+      "selector": ".IK3GNd > i"
     }
   },
   "resEdit": {
-    "shortcutKey": "",
+    "shortcutKey": "e",
     "group": "result",
     "alias": "suggest edit",
     "alt": true,
     "clickTarget": {
-      "selector": ".tlid-suggest-edit-button"
-    }
-  },
-  "resRoman": {
-    "shortcutKey": "", 
-    "group": "result",
-    "alias": "roman",
-    "alt": true,
-    "clickTarget": {
-      "selector": "#gt-res-roman"
+      "selector": ".q7sDqe.Ydl7dd > span"
     }
   },
   "resListen": {
@@ -234,7 +209,8 @@
     "alias": "listen",
     "alt": true,
     "clickTarget": {
-      "selector": ".res-tts"
+      "selector": ".m0Qfkd > .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd)",
+      "idx": 1
     }
   },
   "pbStar": {
@@ -243,14 +219,15 @@
     "alias": "save to phrase book",
     "alt": true,
     "clickTarget": {
-      "selector": ".starbutton"
+      "selector": ".X86VN > .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd)"
     }
   },
   // uncustomizable
   "resCancelFeedback": {
     "shortcutKey": "ESC",
     "clickTarget": {
-      "selector": "#st-buttons .jfk-button-standard"
+      "selector": ".i7SxSc",
+      "idx": 0
     }
   },
 
@@ -260,21 +237,11 @@
     "alias": "focus to source",
     "alt": true,
     "clickTarget": {
-      "selector": "#source"
+      "selector": ".er8xn"
     },
     "captionTarget": {
-      "selector": ".source-wrap"
+      "selector": ".QFw9Te"
     },
     "cmd": "focus"
-  },
-
-  // uncustomizable
-  "translate": {
-    "shortcutKey": "shift + enter",
-    "clickTarget": {
-      "selector": ".go-button"
-    },
-    "naviDisp": "while hovering",
-    "cmd": "click"
   }
 }

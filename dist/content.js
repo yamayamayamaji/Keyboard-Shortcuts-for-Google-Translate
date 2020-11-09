@@ -32,7 +32,7 @@ const KS4GT_CS = {
     /**
      * ready before initialize
      */
-    ready: function() {
+    ready() {
         const me = this;
 
         if (me.isReady) { return; }
@@ -59,13 +59,13 @@ const KS4GT_CS = {
     /**
      * initialize extension content script
      */
-    init: function() {
+    init() {
         const me = this;
 
         if (!me.isReady) {
             me.onReady = me.init.bind(me);
             me.injectStyleSheet(chrome.extension.getURL('content.css'));
-            me.observeResultUpdated();
+            me.observeDomUpdated();
             me.ready();
             return;
         }
@@ -82,26 +82,40 @@ const KS4GT_CS = {
     },
 
     /**
-     * observe dom updated in source footer area and result area.
-     * if updated, resetting recievers and key captions.
+     * observe dom updated.
+     *   if updated source footer area and result area, resetting recievers and key captions.
+     *   if updated language menu button area, resetting key captions.
      */
-    observeResultUpdated() {
-        const me = this,
-            sourceFooter = document.querySelector(".source-or-target-footer"),
-            resultContainer = document.querySelector(".tlid-results-container"),
-            observer = new MutationObserver((MutationRecords, MutationObserver) => {
-                me.init();
-            });
-
-        observer.observe(resultContainer, {childList: true});
-        observer.observe(sourceFooter, {childList: true, subtree: true});
+    observeDomUpdated() {
+        const me = this;
+        {
+            const sourceFooter = document.querySelector('.FFpbKc'),
+                resultContainer = document.querySelector('.dePhmb'),
+                initializer = new MutationObserver((MutationRecords, MutationObserver) => {
+                    me.init();
+                });
+            sourceFooter && initializer.observe(resultContainer, {childList: true});
+            resultContainer && initializer.observe(sourceFooter, {childList: true, subtree: true});
+        }
+        {
+            const sourceLangMenuBtn = document.querySelectorAll('.szLmtb')[0],
+                targetLangMenuBtn = document.querySelectorAll('.szLmtb')[1],
+                captionReseter = new MutationObserver((MutationRecords, MutationObserver) => {
+                    const m = MutationRecords[0];
+                    if (!m.target.dataset.keyNavi) {
+                        me.setKeyCaption();
+                    }
+                });
+            sourceLangMenuBtn && captionReseter.observe(sourceLangMenuBtn, {subtree: true, attributeFilter: ['data-key-navi']});
+            targetLangMenuBtn && captionReseter.observe(targetLangMenuBtn, {subtree: true, attributeFilter: ['data-key-navi']});
+        }
     },
 
     /**
      * setup recievers object from setting file
      * @param  {Object} settingsJson JSON of default settings
      */
-    setupRecievers: function(settingsJson) {
+    setupRecievers(settingsJson) {
         const me = this,
             $ = document.querySelectorAll.bind(document);
 
@@ -124,7 +138,7 @@ const KS4GT_CS = {
     /**
      * apply user custom settings to extension
      */
-    applyUserSettings: function() {
+    applyUserSettings() {
         const me = this,
             userSettings = me.userSettings;
 
@@ -147,7 +161,7 @@ const KS4GT_CS = {
     /**
      * display shortcut key character to each target
      */
-    setKeyCaption: function() {
+    setKeyCaption() {
         const me = this,
             altCaption = (me.platformInfo.os === chrome.runtime.PlatformOs.MAC) ?
                         'option' : 'alt';
@@ -200,10 +214,11 @@ const KS4GT_CS = {
      * inject style sheet
      * @param {String} url
      */
-    injectStyleSheet: function(url) {
-        const link = document.createElement('link'),
-            lastLink = document.querySelector('link:last-of-type');
+    injectStyleSheet(url) {
+        const lastLink = document.querySelector('link:last-of-type');
+        if (!lastLink) { return; }
 
+        const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
         link.href = url;
@@ -213,7 +228,7 @@ const KS4GT_CS = {
     /**
      * create mouse event emulators and set to property of KS4GT_CS
      */
-    setupMouseEventEmulator: function() {
+    setupMouseEventEmulator() {
         const events = ['mousedown', 'mouseup', 'mouseout', 'mouseover', 'click'];
 
         for (let i = 0, e; e = events[i++];) {
@@ -229,7 +244,7 @@ const KS4GT_CS = {
      *     cmd: "emulate command"
      * }}
      */
-    initKeyMaps: function() {
+    initKeyMaps() {
         const me = this,
             re = new RegExp();
         let keys = '';
@@ -261,7 +276,7 @@ const KS4GT_CS = {
     /**
      * set listeners for shortcut key event
      */
-    listenKeyEvent: function() {
+    listenKeyEvent() {
         const me = this,
             translateRcv = me.recievers.translate;
 
@@ -300,7 +315,7 @@ const KS4GT_CS = {
      * @param  {Event}  evt  triggered event
      * @return {Object} reciver info (return undefined if not assigned any)
      */
-    getAssignedReciever: function(evt) {
+    getAssignedReciever(evt) {
         const me = this,
             pivotKeyPressed = (me.platformInfo.os === chrome.runtime.PlatformOs.MAC) ?
                                 evt.altKey || evt.ctrlKey : evt.altKey
@@ -341,13 +356,13 @@ const KS4GT_CS = {
      * @param  {Srting} cmd name of emulate event
      * @param  {Object} elm HTML Element
      */
-    emulate: function(cmd = 'mouseDownUp', elm) {
+    emulate(cmd = 'click', elm) {
         if (elm) {
             const me = this;
 
-            if (!cmd) {
-                cmd = 'mouseDownUp';
-            }
+            // if (!cmd) {
+            //     cmd = 'mouseDownUp';
+            // }
 
             me['emulate' + me.camelize(cmd)](elm);
         }
@@ -357,7 +372,7 @@ const KS4GT_CS = {
      * emulate mousedown and mouseup (simmulate click) event
      * @param  {Object} elm HTML Element
      */
-    emulateMouseDownUp: function(elm) {
+    emulateMouseDownUp(elm) {
         if (elm) {
             const de = elm.dispatchEvent.bind(elm),
                 me = this.mouseEvent;
@@ -372,7 +387,7 @@ const KS4GT_CS = {
      * emulate click
      * @param  {Object} elm HTML Element
      */
-    emulateClick: function(elm) {
+    emulateClick(elm) {
         if (elm) {
             elm.click();
         }
@@ -382,7 +397,7 @@ const KS4GT_CS = {
      * emulate focus
      * @param  {Object} elm HTML Element
      */
-    emulateFocus: function(elm) {
+    emulateFocus(elm) {
         if (elm) {
             elm.focus();
         }
@@ -393,7 +408,7 @@ const KS4GT_CS = {
      * @param {Object}   obj  object to iterate
      * @param {Function} fn   callback function
      */
-    iterateObject: function(obj, fn) {
+    iterateObject(obj, fn) {
         for (let key in obj) {
             if (obj.hasOwnProperty(key)) {
                 if (fn.call(obj, key, obj[key], obj) === false) {
@@ -403,7 +418,7 @@ const KS4GT_CS = {
         }
     },
 
-    camelize: function(str) {
+    camelize(str) {
         return str.replace(/(?:^|[-_])(\w)/g, function(_, c) {
             return c ? c.toUpperCase() : '';
         });
