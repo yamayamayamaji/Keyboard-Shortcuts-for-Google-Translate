@@ -19,6 +19,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     '<%= dir.dev %>/content.css': '<%= dir.sass %>/content.scss',
+                    '<%= dir.dev %>/content202011.css': '<%= dir.sass %>/content202011.scss',
                     '<%= dir.dev %>/options.css': '<%= dir.sass %>/options.scss'
                 }
             },
@@ -41,12 +42,14 @@ module.exports = function(grunt) {
         jsonmin: {
             dev: {
                 files: {
-                    '<%= dir.dev %>/default_settings.min.json': '<%= dir.dev %>/default_settings.json'
+                    '<%= dir.dev %>/default_settings.min.json': '<%= dir.dev %>/default_settings.json',
+                    '<%= dir.dev %>/default_settings202011.min.json': '<%= dir.dev %>/default_settings202011.json'
                 }
             },
             dist: {
                 files: {
-                    '<%= dir.dist %>/default_settings.min.json': '<%= dir.dev %>/default_settings.json'
+                    '<%= dir.dist %>/default_settings.min.json': '<%= dir.dev %>/default_settings.json',
+                    '<%= dir.dist %>/default_settings202011.min.json': '<%= dir.dev %>/default_settings202011.json'
                 }
             }
         },

@@ -30,13 +30,11 @@ KS4GT_BP = {
     /**
      * initialize extension background script
      */
-    init: function() {
-        var me = this;
-
+    init() {
         //register message listener
-        chrome.runtime.onMessage.addListener(me.onMessage.bind(me));
+        chrome.runtime.onMessage.addListener(this.onMessage.bind(this));
 
-        return me;
+        return this;
     },
 
     /**
@@ -44,13 +42,13 @@ KS4GT_BP = {
      * @type {Object}
      */
     listeners: {
-        userSettings: function(opt) {
+        userSettings(opt) {
             return this.getUserSettings(opt && opt.search);
         },
-        defaultSettings: function(opt) {
-            return this.getDefaultSettings();
+        defaultSettings(opt) {
+            return this.getDefaultSettings(opt.baseName);
         },
-        platformInfo: function(opt) {
+        platformInfo(opt) {
             return this.getPlatformInfo();
         }
     },
@@ -61,9 +59,8 @@ KS4GT_BP = {
      * @param  {chrome.runtime.MessageSender} sender message sender info
      * @param  {Function} sendResponse function using by response
      */
-    onMessage: function(message, sender, sendResponse) {
-        var me = this,
-            promises = new Map();
+    onMessage(message, sender, sendResponse) {
+        const promises = new Map();
 
         if (!message) { sendResponse({}); }
 
@@ -71,15 +68,15 @@ KS4GT_BP = {
             message = {message: null};
         }
 
-        me.iterateObject(message, function(req, opt) {
-            var f = me.listeners[req];
-            promises.set(req, f && f.call(me, opt, sender));
+        this.iterateObject(message, (req, opt) => {
+            const f = this.listeners[req];
+            promises.set(req, f && f.call(this, opt, sender));
         });
 
         // when promises are all done, response of results
         Promise.all(promises.values())
         .then(function(res) {
-            var ret = {}, i = 0;
+            let ret = {}, i = 0;
             promises.forEach(function(v, k) {
                 ret[k] = res[i++];
             });
@@ -97,8 +94,8 @@ KS4GT_BP = {
      * @param {Object}   obj  object to iterate
      * @param {Function} fn   callback function
      */
-    iterateObject: function(obj, fn) {
-        for (var key in obj) {
+    iterateObject(obj, fn) {
+        for (let key in obj) {
             if (obj.hasOwnProperty(key)) {
                 if (fn.call(obj, key, obj[key], obj) === false) {
                     return;
@@ -111,10 +108,8 @@ KS4GT_BP = {
      * return userSettings
      * @return {Promise/Object(when promise resolved)} userSettings
      */
-    getUserSettings: function() {
-        var me = this;
-
-        return me.getStorage('userSettings');
+    getUserSettings() {
+        return this.getStorage('userSettings');
     },
 
     /**
@@ -122,9 +117,7 @@ KS4GT_BP = {
      * @param  {String/Array/Object} search search values (get only a portion of the key will match this)
      * @return {Promise/Object(when promise resolved)} userSettings
      */
-    getStorage: function(search) {
-        var me = this;
-
+    getStorage(search) {
         return new Promise(function(resolve, reject) {
             chrome.storage.sync.get(search, function(items) {
                 items = items || {};
@@ -138,11 +131,11 @@ KS4GT_BP = {
 
     /**
      * load JSON file of default settings
+     * @param  {String} baseName base name of JSON file
      * @return {Promise/JSON(when promise resolved)} JSON of default settings
      */
-    getDefaultSettings: function() {
-
-        return fetch(chrome.extension.getURL('default_settings.min.json'))
+    getDefaultSettings(baseName) {
+        return fetch(chrome.extension.getURL(`${baseName}.min.json`))
                 .then(function(res) {
                     return res.json();
                 });
@@ -152,8 +145,7 @@ KS4GT_BP = {
      * returns information about the current platform
      * @return {Promise/JSON(when promise resolved)} object of platform information
      */
-    getPlatformInfo: function() {
-
+    getPlatformInfo() {
         return new Promise(function(resolve, reject) {
             chrome.runtime.getPlatformInfo(function(pi){
                 resolve(pi);

@@ -1,0 +1,183 @@
+/*!
+ * content.scss
+ * in "Keyboard Shortcuts for Google Translate" (Google Chrome Extension)
+ * https://github.com/yamayamayamaji/Keyboard-Shortcuts-for-Google-Translate
+ * Copyright 2013, Ryosuke Yamaji
+ *
+ * License: MIT
+ */
+@charset "utf-8";
+
+//mixins
+@mixin key-nav() {
+    color: #aaa;
+    font-weight: normal;
+    font-size: x-small;
+    position: relative;
+    text-decoration: underline;
+    content: attr(data-key-navi);
+    @content;
+}
+
+@mixin key-nav-h() {
+    @include key-nav();
+}
+@mixin key-nav-v($top, $display: block) {
+    @include key-nav() {
+        display: $display;
+        text-align: center;
+        @content;
+    }
+    top: $top;
+}
+
+@mixin key-nav-v-char($top: 0, $display: block) {
+    @include key-nav-v($top, $display) {
+        font-size: x-small;
+    }
+}
+@mixin key-nav-v-num($top: 0) {
+    @include key-nav() {
+        @content;
+    }
+    left: 0;
+    line-height: 75px;
+    position: absolute;
+    width: 100%;
+}
+@mixin key-nav-for-langlist() {
+    @include key-nav() {
+        left: 34px;
+        @content;
+    }
+    line-height: 48px;
+    position: absolute;
+}
+
+
+// language swap
+.swap {
+    &.navi {
+        position: relative;
+        &::after {
+            @include key-nav-v-num();
+        }
+    }
+}
+
+// language select
+.ls-wrap .jfk-button:not(.swap) {
+    &.navi {
+        &::after {
+            @include key-nav-v-num();
+            // counter-increment: langs;
+        }
+    }
+}
+
+// source language list
+// target language list
+.sl-more {
+    &.navi {
+        position: relative;
+        &::after {
+            @include key-nav-for-langlist();
+            body.with-sl-list & {
+                transform: inherit;
+                left: unset;
+            }
+        }
+    }
+}
+.tl-more {
+    &.navi {
+        position: relative;
+        &::after {
+            @include key-nav-for-langlist();
+            body.with-tl-list & {
+                transform: inherit;
+                left: unset;
+            }
+        }
+    }
+}
+
+.go-button {
+    &::after {
+        @include key-nav-v-char(9px, none);
+    }
+    &:hover::after {
+        display: inline-block;
+    }
+}
+
+.tlid-clear-source-text {
+    &.navi {
+        &::after {
+            @include key-nav-v-char(-7px);
+        }
+    }
+}
+
+#gt-speech,
+#gt-src-roman,
+#gt-res-select,
+#gt-res-roman {
+    &.navi {
+        &::after {
+            @include key-nav-v-char(-17px);
+            @include key-nav-h();
+        }
+    }
+}
+
+.ita-kd-inputtool-icon {
+    &.navi {
+        &::after {
+            @include key-nav-v-char(-1px);
+        }
+    }
+}
+.ita-kd-dropdown {
+    &.navi {
+        &::after {
+            @include key-nav-v(-4px);
+            left: 1px;
+        }
+    }
+}
+.vk-t-btn {
+    &.navi {
+        &::after {
+            @include key-nav-v(-14px);
+            left: -2px;
+        }
+    }
+}
+
+.src-tts,
+.res-tts,
+.tlid-copy-translation-button,
+.tlid-suggest-edit-button,
+.starbutton {
+    &.navi {
+        &::after {
+            @include key-nav-v-char(-6px);
+        }
+    }
+}
+
+// source wrapper
+.source-wrap {
+    &.navi {
+        &::after {
+            @include key-nav-v(auto) {
+                font-size: x-small;
+                right: 3px;
+                bottom: 1px;
+                position: absolute;
+                content: attr(data-key-navi) " to focus";
+            }
+        }
+    }
+}

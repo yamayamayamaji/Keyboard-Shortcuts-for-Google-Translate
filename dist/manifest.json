@@ -2,7 +2,7 @@
   "name": "Keyboard Shortcuts for Google Translate",
   "short_name": "KS4GT",
 
-  "version": "2.7.0.0",
+  "version": "2.7.1.1",
 
   "description": "Provides keyboard shortcuts in the Google Translate™ page.",
 
@@ -249,6 +249,8 @@
 
   "web_accessible_resources": [
     "content.css",
-    "default_settings.min.json"
+    "default_settings.min.json",
+    "content202011.css",
+    "default_settings202011.min.json"
   ]
 }

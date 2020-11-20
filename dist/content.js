@@ -29,6 +29,65 @@ const KS4GT_CS = {
         none:          'none'
     },
 
+    domUpdateObserver: () => {},
+
+    /**
+     * There may be more than one version of the UI, depending on the user's environment,
+     * such as a transitional period when the UI of the Google Translate page is changing.
+     * Configure each version of UI here.
+     */
+    uiVersionConfig: {
+        latest: {
+            cssFileName: 'content.css',
+            defaultSettingsBaseName: 'default_settings',
+            /**
+             * observe dom updated.
+             *   if updated source footer area and result area, resetting recievers and key captions.
+             *   if updated language menu button area, resetting key captions.
+             */
+            domUpdateObserver() {
+                {
+                    const sourceFooter = document.querySelector('.FFpbKc'),
+                        resultContainer = document.querySelector('.dePhmb'),
+                        initializer = new MutationObserver((MutationRecords, MutationObserver) => {
+                            this.init();
+                        });
+                    sourceFooter && initializer.observe(resultContainer, {childList: true});
+                    resultContainer && initializer.observe(sourceFooter, {childList: true, subtree: true});
+                }
+                {
+                    const sourceLangMenuBtn = document.querySelectorAll('.szLmtb')[0],
+                        targetLangMenuBtn = document.querySelectorAll('.szLmtb')[1],
+                        captionReseter = new MutationObserver((MutationRecords, MutationObserver) => {
+                            const m = MutationRecords[0];
+                            if (!m.target.dataset.keyNavi) {
+                                this.setKeyCaption();
+                            }
+                        });
+                    sourceLangMenuBtn && captionReseter.observe(sourceLangMenuBtn, {subtree: true, attributeFilter: ['data-key-navi']});
+                    targetLangMenuBtn && captionReseter.observe(targetLangMenuBtn, {subtree: true, attributeFilter: ['data-key-navi']});
+                }
+            },
+        },
+        202011: {
+            cssFileName: 'content202011.css',
+            defaultSettingsBaseName: 'default_settings202011',
+            /**
+             * observe dom updated in source footer area and result area.
+             * if updated, resetting recievers and key captions.
+            */
+            domUpdateObserver() {
+                const sourceFooter = document.querySelector('.source-or-target-footer'),
+                    resultContainer = document.querySelector('.tlid-results-container'),
+                    initializer = new MutationObserver((MutationRecords, MutationObserver) => {
+                        this.init();
+                    });
+                sourceFooter && initializer.observe(resultContainer, {childList: true});
+                resultContainer && initializer.observe(sourceFooter, {childList: true, subtree: true});
+            },
+        },
+    },
+
     /**
      * ready before initialize
      */
@@ -37,9 +96,15 @@ const KS4GT_CS = {
 
         if (me.isReady) { return; }
 
+        const config = me.uiVersionConfig[me.getUiVersion()];
+
+        me.injectStyleSheet(chrome.extension.getURL(config.cssFileName));
+        me.domUpdateObserver = config.domUpdateObserver;
+        me.observeDomUpdated();
+
         chrome.runtime.sendMessage({
                 // load default settings from json file
-                defaultSettings: null,
+                defaultSettings: {baseName: config.defaultSettingsBaseName},
                 // load user settings from extension sync storage
                 userSettings: null,
                 // get runtime platform infomation
@@ -64,8 +129,6 @@ const KS4GT_CS = {
 
         if (!me.isReady) {
             me.onReady = me.init.bind(me);
-            me.injectStyleSheet(chrome.extension.getURL('content.css'));
-            me.observeDomUpdated();
             me.ready();
             return;
         }
@@ -82,33 +145,21 @@ const KS4GT_CS = {
     },
 
     /**
+     * return version value indicating the version of Google Translate Page UI
+     * @return {String} value indicating the version
+     */
+    getUiVersion() {
+        if (document.querySelector('.jfk-button')) {
+            return '202011';
+        }
+        return 'latest';
+    },
+
+    /**
      * observe dom updated.
-     *   if updated source footer area and result area, resetting recievers and key captions.
-     *   if updated language menu button area, resetting key captions.
      */
     observeDomUpdated() {
-        const me = this;
-        {
-            const sourceFooter = document.querySelector('.FFpbKc'),
-                resultContainer = document.querySelector('.dePhmb'),
-                initializer = new MutationObserver((MutationRecords, MutationObserver) => {
-                    me.init();
-                });
-            sourceFooter && initializer.observe(resultContainer, {childList: true});
-            resultContainer && initializer.observe(sourceFooter, {childList: true, subtree: true});
-        }
-        {
-            const sourceLangMenuBtn = document.querySelectorAll('.szLmtb')[0],
-                targetLangMenuBtn = document.querySelectorAll('.szLmtb')[1],
-                captionReseter = new MutationObserver((MutationRecords, MutationObserver) => {
-                    const m = MutationRecords[0];
-                    if (!m.target.dataset.keyNavi) {
-                        me.setKeyCaption();
-                    }
-                });
-            sourceLangMenuBtn && captionReseter.observe(sourceLangMenuBtn, {subtree: true, attributeFilter: ['data-key-navi']});
-            targetLangMenuBtn && captionReseter.observe(targetLangMenuBtn, {subtree: true, attributeFilter: ['data-key-navi']});
-        }
+        this.domUpdateObserver();
     },
 
     /**
@@ -358,13 +409,7 @@ const KS4GT_CS = {
      */
     emulate(cmd = 'click', elm) {
         if (elm) {
-            const me = this;
-
-            // if (!cmd) {
-            //     cmd = 'mouseDownUp';
-            // }
-
-            me['emulate' + me.camelize(cmd)](elm);
+            this['emulate' + this.camelize(cmd)](elm);
         }
     },
 
