@@ -10,7 +10,11 @@
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jsonmin": "^0.2.4",
-    "grunt-zip": "^0.17.1"
+    "grunt-zip": "^0.17.1",
+    "js-yaml": "^3.14.0",
+    "lodash": "^4.17.20",
+    "minimatch": "^3.0.4",
+    "underscore.string": "^3.3.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
