@@ -296,7 +296,7 @@ const KS4GT_OP = {
 
         chrome.runtime.sendMessage({
                 // load default settings from json file
-                defaultSettings: null,
+                defaultSettings: {baseName: 'default_settings'},
                 // load user settings from extension sync storage
                 userSettings: null,
                 // get runtime platform infomation
