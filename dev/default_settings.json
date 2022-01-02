@@ -146,11 +146,10 @@
     }
   },
   "srcListen": {
-    "shortcutKey": "l",
+    "shortcutKey": "k",
     "group": "source",
     "alias": "listen",
     "alt": true,
-    "shift": true, 
     "clickTarget": {
       "selector": ".m0Qfkd .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd)",
       "idx": 0
@@ -191,7 +190,19 @@
     "alias": "copy",
     "alt": true,
     "clickTarget": {
-      "selector": ".IK3GNd > i"
+      "selector": ".IK3GNd > i",
+      "idx": 0
+    }
+  },
+  "resCopyGendered": {
+    "shortcutKey": "c",
+    "group": "result",
+    "alias": "copy gendered",
+    "alt": true,
+    "shift": true,
+    "clickTarget": {
+      "selector": ".IK3GNd > i",
+      "idx": 1
     }
   },
   "resEdit": {
@@ -211,6 +222,17 @@
     "clickTarget": {
       "selector": ".m0Qfkd .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd)",
       "idx": 1
+    }
+  },
+  "resListenGendered": {
+    "shortcutKey": "l",
+    "group": "result",
+    "alias": "listen gendered",
+    "alt": true,
+    "shift": true, 
+    "clickTarget": {
+      "selector": ".m0Qfkd > .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd)",
+      "idx": 2
     }
   },
   "pbStar": {
