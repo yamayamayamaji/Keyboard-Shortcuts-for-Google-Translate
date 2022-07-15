@@ -152,7 +152,7 @@
     "alt": true,
     "shift": true, 
     "clickTarget": {
-      "selector": ".m0Qfkd > .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd)",
+      "selector": ".m0Qfkd .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd)",
       "idx": 0
     }
   },
@@ -209,7 +209,7 @@
     "alias": "listen",
     "alt": true,
     "clickTarget": {
-      "selector": ".m0Qfkd > .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd)",
+      "selector": ".m0Qfkd .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd)",
       "idx": 1
     }
   },

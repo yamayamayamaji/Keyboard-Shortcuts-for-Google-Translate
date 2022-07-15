@@ -98,7 +98,7 @@ const KS4GT_CS = {
 
         const config = me.uiVersionConfig[me.getUiVersion()];
 
-        me.injectStyleSheet(chrome.extension.getURL(config.cssFileName));
+        me.injectStyleSheet(chrome.runtime.getURL(config.cssFileName));
         me.domUpdateObserver = config.domUpdateObserver;
         me.observeDomUpdated();
 

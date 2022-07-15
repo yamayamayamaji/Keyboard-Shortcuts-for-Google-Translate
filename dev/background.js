@@ -135,7 +135,7 @@ KS4GT_BP = {
      * @return {Promise/JSON(when promise resolved)} JSON of default settings
      */
     getDefaultSettings(baseName) {
-        return fetch(chrome.extension.getURL(`${baseName}.min.json`))
+        return fetch(chrome.runtime.getURL(`${baseName}.min.json`))
                 .then(function(res) {
                     return res.json();
                 });

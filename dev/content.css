@@ -85,7 +85,7 @@
   text-decoration: underline;
   content: attr(data-key-navi); }
 
-.m0Qfkd > .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd).navi::after {
+.m0Qfkd .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd).navi::after {
   color: #aaa;
   font-family: none;
   font-weight: 600;
