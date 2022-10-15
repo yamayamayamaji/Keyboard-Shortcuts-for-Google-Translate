@@ -48,7 +48,7 @@ const KS4GT_CS = {
             domUpdateObserver() {
                 {
                     const sourceFooter = document.querySelector('.FFpbKc'),
-                        resultContainer = document.querySelector('.dePhmb'),
+                        resultContainer = document.querySelector('.QcsUad'),
                         initializer = new MutationObserver((MutationRecords, MutationObserver) => {
                             this.init();
                         });
