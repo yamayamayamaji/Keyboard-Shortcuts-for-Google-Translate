@@ -48,12 +48,44 @@ const KS4GT_CS = {
             domUpdateObserver() {
                 {
                     const sourceFooter = document.querySelector('.FFpbKc'),
+                        resultContainer = document.querySelector('.usGWQd'),
+                        initializer = new MutationObserver((MutationRecords, MutationObserver) => {
+                            this.init();
+                        });
+                    resultContainer && initializer.observe(resultContainer, {childList: true});
+                    sourceFooter && initializer.observe(sourceFooter, {childList: true, subtree: true});
+                }
+                {
+                    const sourceLangMenuBtn = document.querySelectorAll('.szLmtb')[0],
+                        targetLangMenuBtn = document.querySelectorAll('.szLmtb')[1],
+                        captionReseter = new MutationObserver((MutationRecords, MutationObserver) => {
+                            const m = MutationRecords[0];
+                            if (!m.target.dataset.keyNavi) {
+                                this.setKeyCaption();
+                            }
+                        });
+                    sourceLangMenuBtn && captionReseter.observe(sourceLangMenuBtn, {subtree: true, attributeFilter: ['data-key-navi']});
+                    targetLangMenuBtn && captionReseter.observe(targetLangMenuBtn, {subtree: true, attributeFilter: ['data-key-navi']});
+                }
+            },
+        },
+        202210: {
+            cssFileName: 'content202210.css',
+            defaultSettingsBaseName: 'default_settings202210',
+            /**
+             * observe dom updated.
+             *   if updated source footer area and result area, resetting recievers and key captions.
+             *   if updated language menu button area, resetting key captions.
+             */
+            domUpdateObserver() {
+                {
+                    const sourceFooter = document.querySelector('.FFpbKc'),
                         resultContainer = document.querySelector('.dePhmb'),
                         initializer = new MutationObserver((MutationRecords, MutationObserver) => {
                             this.init();
                         });
-                    sourceFooter && initializer.observe(resultContainer, {childList: true});
-                    resultContainer && initializer.observe(sourceFooter, {childList: true, subtree: true});
+                    resultContainer && initializer.observe(resultContainer, {childList: true});
+                    sourceFooter && initializer.observe(sourceFooter, {childList: true, subtree: true});
                 }
                 {
                     const sourceLangMenuBtn = document.querySelectorAll('.szLmtb')[0],
@@ -82,8 +114,8 @@ const KS4GT_CS = {
                     initializer = new MutationObserver((MutationRecords, MutationObserver) => {
                         this.init();
                     });
-                sourceFooter && initializer.observe(resultContainer, {childList: true});
-                resultContainer && initializer.observe(sourceFooter, {childList: true, subtree: true});
+                resultContainer && initializer.observe(resultContainer, {childList: true});
+                sourceFooter && initializer.observe(sourceFooter, {childList: true, subtree: true});
             },
         },
     },
@@ -149,6 +181,9 @@ const KS4GT_CS = {
      * @return {String} value indicating the version
      */
     getUiVersion() {
+        if (document.querySelector('.jfk-button')) {
+            return '202011';
+        }
         if (document.querySelector('.jfk-button')) {
             return '202011';
         }

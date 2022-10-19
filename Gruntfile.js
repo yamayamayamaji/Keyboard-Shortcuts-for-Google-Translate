@@ -43,12 +43,14 @@ module.exports = function(grunt) {
             dev: {
                 files: {
                     '<%= dir.dev %>/default_settings.min.json': '<%= dir.dev %>/default_settings.json',
+                    '<%= dir.dev %>/default_settings202210.min.json': '<%= dir.dev %>/default_settings202210.json',
                     '<%= dir.dev %>/default_settings202011.min.json': '<%= dir.dev %>/default_settings202011.json'
                 }
             },
             dist: {
                 files: {
                     '<%= dir.dist %>/default_settings.min.json': '<%= dir.dev %>/default_settings.json',
+                    '<%= dir.dist %>/default_settings202210.min.json': '<%= dir.dev %>/default_settings202210.json',
                     '<%= dir.dist %>/default_settings202011.min.json': '<%= dir.dev %>/default_settings202011.json'
                 }
             }
