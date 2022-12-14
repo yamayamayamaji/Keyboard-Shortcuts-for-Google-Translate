@@ -1,0 +1,192 @@
+/*!
+ * content.scss
+ * in "Keyboard Shortcuts for Google Translate" (Google Chrome Extension)
+ * https://github.com/yamayamayamaji/Keyboard-Shortcuts-for-Google-Translate
+ * Copyright 2013, Ryosuke Yamaji
+ *
+ * License: MIT
+ */
+@charset "utf-8";
+
+//mixins
+@mixin key-nav() {
+    color: #aaa;
+    font-family: none;
+    font-weight: 600;
+    font-size: x-small;
+    position: relative;
+    text-decoration: underline;
+    content: attr(data-key-navi);
+    @content;
+}
+
+@mixin key-nav-h() {
+    @include key-nav();
+}
+@mixin key-nav-v($top, $display: block) {
+    @include key-nav() {
+        display: $display;
+        text-align: center;
+        @content;
+    }
+    top: $top;
+}
+
+@mixin key-nav-v-char($top: 0, $display: block) {
+    @include key-nav-v($top, $display) {
+        font-size: x-small;
+    }
+}
+@mixin key-nav-v-num($top: 0) {
+    @include key-nav() {
+        @content;
+    }
+    left: 0;
+    line-height: 54px;
+    position: absolute;
+    width: 100%;
+}
+@mixin key-nav-for-langlist() {
+    @include key-nav() {
+        left: 3px;
+        @content;
+    }
+    line-height: 47px;
+    position: absolute;
+}
+
+
+// language swap
+.U2dVxe>i {
+    &.navi {
+        position: relative;
+        &::after {
+            @include key-nav-v-num();
+        }
+    }
+}
+
+// language select
+.VfPpkd-AznF2e {
+    &.navi {
+        &::after {
+            @include key-nav-v-num();
+            line-height: 74px;
+        }
+    }
+}
+
+// source language list
+// target language list
+.szLmtb > .zQ0atf {
+    &.navi {
+        position: relative;
+        &::after {
+            @include key-nav-for-langlist();
+        }
+    }
+}
+.szLmtb.HotEze > .zQ0atf {
+    &.navi {
+        &::after {
+            transform: inherit;
+            // top: -27px;
+        }
+    }
+}
+
+// source clear
+.GA2I6e > i {
+    &.navi {
+        &::after {
+            @include key-nav-v-char(-3px);
+        }
+    }
+}
+
+// source speech
+.MtoyUd > span {
+    &.navi {
+        &::after {
+            @include key-nav-v-char(-10px);
+            @include key-nav-h();
+        }
+    }
+}
+// source listen
+// target listen
+.m0Qfkd .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd) {
+    &.navi {
+        &::after {
+            @include key-nav-v-char(-1px);
+            @include key-nav-h();
+        }
+    }
+}
+
+// virtual keyboard
+.ita-kd-inputtool-icon.ita-kd-left {
+    &.navi {
+        &::after {
+            @include key-nav-v-char();
+        }
+    }
+}
+// select input tool
+.ita-kd-dropdown {
+    &.navi {
+        &::after {
+            @include key-nav-v(-4px);
+            left: 1px;
+        }
+    }
+}
+// close input tool
+.ita-hwt-close {
+    &.navi {
+        &::after {
+            @include key-nav-v(20px);
+            left: 1px;
+        }
+    }
+}
+
+// target copy
+.IK3GNd > i {
+    &.navi {
+        &::after {
+            @include key-nav-v-char(1px);
+        }
+    }
+}
+// target suggest edit
+.q7sDqe.Ydl7dd > span {
+    &.navi {
+        &::after {
+            @include key-nav-v-char(-7px);
+        }
+    }
+}
+// target star (save)
+.X86VN > .VfPpkd-Bz112c-kBDsod:not(.VfPpkd-Bz112c-kBDsod-OWXEXe-IT5dJd) {
+    &.navi {
+        &::after {
+            @include key-nav-v-char(-2px);
+        }
+    }
+}
+
+// source wrapper
+.QFw9Te {
+    &.navi {
+        &::after {
+            @include key-nav-v(auto) {
+                font-size: x-small;
+                right: 3px;
+                bottom: 1px;
+                position: absolute;
+                content: attr(data-key-navi) " to focus";
+            }
+        }
+    }
+}
