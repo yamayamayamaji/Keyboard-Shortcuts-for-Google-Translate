@@ -191,7 +191,8 @@
     "alias": "copy",
     "alt": true,
     "clickTarget": {
-      "selector": ".jethkb > i"
+      "selector": ".itOtF > i",
+      "idx": 1
     }
   },
   "resEdit": {

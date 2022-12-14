@@ -181,8 +181,8 @@ const KS4GT_CS = {
      * @return {String} value indicating the version
      */
     getUiVersion() {
-        if (document.querySelector('.jfk-button')) {
-            return '202011';
+        if (document.querySelector('.IK3GNd')) {
+            return '202210';
         }
         if (document.querySelector('.jfk-button')) {
             return '202011';
