@@ -1,9 +1,10 @@
 *.pem
 *.log
 ChromeWebStore/
+FireFoxAddOns/
 trash/
 node_modules/
 sass/.sass-cache/
 .DS_Store
 .idea/
-FireFoxAddOns/
+src/
