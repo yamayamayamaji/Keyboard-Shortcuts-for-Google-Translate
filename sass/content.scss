@@ -152,10 +152,11 @@
 }
 
 // target copy
-.itOtF > i {
+// .itOtF > i {
+.itOtF > span {
     &.navi {
         &::after {
-            @include key-nav-v-char(1px);
+            @include key-nav-v-char(-7px);
         }
     }
 }

@@ -191,8 +191,9 @@
     "alias": "copy",
     "alt": true,
     "clickTarget": {
-      "selector": ".itOtF > i",
-      "idx": 1
+      // "selector": ".itOtF > i",
+      "selector": ".itOtF > span",
+      "idx": 2
     }
   },
   "resEdit": {

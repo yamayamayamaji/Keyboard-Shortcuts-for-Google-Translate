@@ -144,7 +144,7 @@
   top: 20px;
   left: 1px; }
 
-.itOtF > i.navi::after {
+.itOtF > span.navi::after {
   color: #aaa;
   font-family: none;
   font-weight: 600;
@@ -155,7 +155,7 @@
   display: block;
   text-align: center;
   font-size: x-small;
-  top: 1px; }
+  top: -7px; }
 
 .q7sDqe.Ydl7dd > span.navi::after {
   color: #aaa;
