@@ -56,12 +56,7 @@ donations are greatly appreciated.
 <a href='https://pledgie.com/campaigns/30417'><img alt='Click here to lend your support to: Keyboard Shortcuts for Google Translate and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30417.png?skin_name=chrome' border='0' ></a>  
  -->
 
+- GitHub Sponsors
+  - https://github.com/sponsors/yamayamayamaji
 - Patreon
   - https://www.patreon.com/yamayamayamaji
-
-- cryptocurrency
-  - BTC: 1C3U2Qnaq9Y9BaYvjVGTpBqSBCaJa1j8KQ
-    <!--- blockchain donation -->
-    - <a href="http://yamayamayamaji.github.io/Keyboard-Shortcuts-for-Google-Translate">Bitcoin donation</a> (bottom of the linked page)
-  - ETH: 0x97bdF0aE580649980494256F2Bec204Db2a6029b
-  - XEM: NCCCWD-QRSGBW-VAUYQM-SXYAPX-KPXV6H-24LR4O-MQ6N

@@ -191,9 +191,7 @@
     "alias": "copy",
     "alt": true,
     "clickTarget": {
-      // "selector": ".itOtF > i",
-      "selector": ".itOtF > span",
-      "idx": 2
+      "selector": "[jsname=\"kImuFf\"] > span"
     }
   },
   "resEdit": {
