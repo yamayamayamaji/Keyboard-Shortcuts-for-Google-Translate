@@ -56,8 +56,8 @@ const KS4GT_CS = {
                     sourceFooter && initializer.observe(sourceFooter, {childList: true, subtree: true});
                 }
                 {
-                    const sourceLangMenuBtn = document.querySelectorAll('.szLmtb')[0],
-                        targetLangMenuBtn = document.querySelectorAll('.szLmtb')[1],
+                    const sourceLangMenuBtn = document.querySelectorAll('.akczyd')[0],
+                        targetLangMenuBtn = document.querySelectorAll('.akczyd')[1],
                         captionReseter = new MutationObserver((MutationRecords, MutationObserver) => {
                             const m = MutationRecords[0];
                             if (!m.target.dataset.keyNavi) {

@@ -6,9 +6,9 @@
  *
  * License: MIT
  */
-.U2dVxe > i.navi {
+[jsname="dnDxad"] > i.navi {
   position: relative; }
-  .U2dVxe > i.navi::after {
+  [jsname="dnDxad"] > i.navi::after {
     color: #aaa;
     font-family: none;
     font-weight: 600;
@@ -35,9 +35,9 @@
   width: 100%;
   line-height: 74px; }
 
-.szLmtb > .zQ0atf.navi {
+[jsname="RCbdJd"] > .VfPpkd-Bz112c-RLmnJb.navi {
   position: relative; }
-  .szLmtb > .zQ0atf.navi::after {
+  [jsname="RCbdJd"] > .VfPpkd-Bz112c-RLmnJb.navi::after {
     color: #aaa;
     font-family: none;
     font-weight: 600;
@@ -47,10 +47,24 @@
     content: attr(data-key-navi);
     left: 3px;
     line-height: 47px;
-    position: absolute; }
+    position: absolute;
+    left: 12px;
+    top: -15px; }
 
-.szLmtb.HotEze > .zQ0atf.navi::after {
-  transform: inherit; }
+[jsname="zumM6d"] > .VfPpkd-Bz112c-RLmnJb.navi::after {
+  transform: inherit;
+  color: #aaa;
+  font-family: none;
+  font-weight: 600;
+  font-size: x-small;
+  position: relative;
+  text-decoration: underline;
+  content: attr(data-key-navi);
+  left: 3px;
+  line-height: 47px;
+  position: absolute;
+  left: 20px;
+  top: 33px; }
 
 .GA2I6e > i.navi::after {
   color: #aaa;

@@ -57,7 +57,7 @@
 
 
 // language swap
-.U2dVxe>i {
+[jsname="dnDxad"] > i {
     &.navi {
         position: relative;
         &::after {
@@ -78,19 +78,23 @@
 
 // source language list
 // target language list
-.szLmtb > .zQ0atf {
+[jsname="RCbdJd"] > .VfPpkd-Bz112c-RLmnJb {
     &.navi {
         position: relative;
         &::after {
             @include key-nav-for-langlist();
+            left: 12px;
+            top: -15px;
         }
     }
 }
-.szLmtb.HotEze > .zQ0atf {
+[jsname="zumM6d"] > .VfPpkd-Bz112c-RLmnJb {
     &.navi {
         &::after {
             transform: inherit;
-            // top: -27px;
+            @include key-nav-for-langlist();
+            left: 20px;
+            top: 33px;
         }
     }
 }

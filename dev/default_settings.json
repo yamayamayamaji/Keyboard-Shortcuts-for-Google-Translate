@@ -36,7 +36,7 @@
     "alias": "lang swap",
     "alt": true,
     "clickTarget": {
-      "selector": ".U2dVxe > i"
+      "selector": "[jsname=\"dnDxad\"] > i"
     }
   },
   "langDetect": {
@@ -108,11 +108,10 @@
     "alias": "source lang menu",
     "alt": true,
     "clickTarget": {
-      "selector": ".szLmtb",
-      "idx": 0
+      "selector": "[jsname=\"RCbdJd\"]"
     },
     "captionTarget": {
-      "selector": ".szLmtb > .zQ0atf"
+      "selector": "[jsname=\"RCbdJd\"] > .VfPpkd-Bz112c-RLmnJb"
     }
   },
   "tlGms": {
@@ -121,8 +120,10 @@
     "alias": "target lang menu",
     "alt": true,
     "clickTarget": {
-      "selector": ".szLmtb > .zQ0atf",
-      "idx": 1
+      "selector": "[jsname=\"zumM6d\"]"
+    },
+    "captionTarget": {
+      "selector": "[jsname=\"zumM6d\"] > .VfPpkd-Bz112c-RLmnJb"
     }
   },
 
