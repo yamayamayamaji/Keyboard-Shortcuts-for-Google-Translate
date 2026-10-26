@@ -36,7 +36,10 @@
     "alias": "lang swap",
     "alt": true,
     "clickTarget": {
-      "selector": "[jsname=\"dnDxad\"] > i"
+      "selector": "[jsname=\"dnDxad\"]"
+    },
+    "captionTarget": {
+      "selector": "[jsname=\"dnDxad\"] > span"
     }
   },
   "langDetect": {

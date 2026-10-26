@@ -57,11 +57,14 @@
 
 
 // language swap
-[jsname="dnDxad"] > i {
+// (caption on the icon wrapper: the button's ::after is used by the ripple effect)
+[jsname="dnDxad"] > span {
     &.navi {
-        position: relative;
         &::after {
             @include key-nav-v-num();
+            bottom: -2px;
+            line-height: normal;
+            text-align: center;
         }
     }
 }
